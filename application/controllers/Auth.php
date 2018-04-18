@@ -71,7 +71,8 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect(base_url().'/auth', 'refresh');
+				redirect(site_url(), 'refresh');
+				var_dump(site_url());
 			}
 			else
 			{
@@ -471,7 +472,7 @@ class Auth extends CI_Controller
 					'email'   => $this->input->post('email'),
 				);
        $data = $this->host_model->set('users', $additional_data);
-       var_dump($additional_data);
+       //var_dump($additional_data);
 	}
 	/*if ($this->form_validation->run() === TRUE && $this->ion_auth->register($password, $email, $additional_data))
 		{
@@ -481,7 +482,7 @@ class Auth extends CI_Controller
 			redirect("auth", 'refresh');
 		}*/
 	else{
-		echo "oufffps";
+		//echo "oufffps";
    $this->layout->view('auth/create_account');
 		}
 	}

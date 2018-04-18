@@ -5,9 +5,10 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
-		$this->load->database();
-		$this->load->library(array('ion_auth', 'form_validation','layout'));
-		$this->lang->load('auth');
+		$this->load->library(array('ion_auth', 'form_validation','layout','back'));
+		$this->load->model(array('host_model'));
+		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+
 		
    	//$this->load->model('propriete_model');
 	}
@@ -19,6 +20,10 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
 	public function index()
 	{
 		$this->layout->view('home');
+	}
+	public function admin()
+	{
+		$this->back->view('back/administrator');
 	}
 
 	public function Offre_limite()
@@ -41,4 +46,111 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
         $this->session->set_userdata($language);
         $this->load->view('langue');
  }
+
+ // add domain name
+ public function add_domain(){
+ 	// recuperation des données
+ 	$data = array(
+         'extension'  => $this->input->post('extension'),
+         'prix'       => $this->input->post('prix'),
+         'prix_renouv'=> $this->input->post('prix_renouv'),
+         'prix_xfer'  => $this->input->post('prix_transfert'),
+         'frequence'  => $this->input->post('frequence'),
+         'description'=> $this->input->post('desc'),
+ 	);
+ 	$query = $this->host_model->set('produits_domaines', $data);
+     	//var_dump($query);
+     
+ 	$result = $this->host_model->get_all('frequences');
+    
+ 	$this->back->view('products/add-domain-name', array('liste'=>$result));
+
+     
+ }
+ public function add_domain_view(){
+ 	$result = $this->host_model->get_all('frequences');
+ 	$this->back->view('products/add-domain-name', array('liste'=>$result));
+
+ }
+  // add host name
+ public function add_host(){
+ 	// recuperation des données
+ 	$data = array(
+         'nom'  => $this->input->post('name'),
+         'disque'       => $this->input->post('disque'),
+         'site_web'=> $this->input->post('siteweb'),
+         'prix'  => $this->input->post('prix'),
+         'frequence'  => $this->input->post('frequence'),
+         'adresses_email'=> $this->input->post('nb_email'),
+         'bande_passante'  => $this->input->post('bp'),
+         'sous-domaines'       => $this->input->post('nb_sous_domaine'),
+         'stockage_email'=> $this->input->post('st_email'),
+         'pieces_jointes'  => $this->input->post('pjointes'),
+         'comptes_ftp'  => $this->input->post('ftp'),
+         'bases-donnees'  => $this->input->post('bd'),
+ 	);
+ 	$query = $this->host_model->set('produits_hebergements', $data);
+     	//var_dump($query);
+     
+ 	$result = $this->host_model->get_all('frequences');
+    
+ 	$this->back->view('products/add-host', array('liste'=>$result));
+
+     
+ }
+ public function add_host_view(){
+ 	$result = $this->host_model->get_all('frequences');
+ 	$this->back->view('products/add-host', array('liste'=>$result));
+
+ }
+
+   // add vps name
+ public function add_vps(){
+ 	// recuperation des données
+ 	$data = array(
+         'nom'  => $this->input->post('name'),
+         'disque'       => $this->input->post('disque'),
+         'processeur'=> $this->input->post('processeur'),
+         'prix'  => $this->input->post('prix'),
+         'frequence'  => $this->input->post('frequence'),
+         'ram'=> $this->input->post('ram'),
+         'bande'  => $this->input->post('bp'),
+         'visiteurs_simult'       => $this->input->post('visiteurs_simult'),
+         'cores'=> $this->input->post('cores'),
+         'use_case'  => $this->input->post('use_case'),
+         'systeme_exploit'  => $this->input->post('systeme'),
+ 	);
+ 	$query = $this->host_model->set('produits_vps', $data);
+     	//var_dump($query);
+     
+ 	$result = $this->host_model->get_all('frequences');
+ 	$systeme = $this->host_model->get_all('systemes_exp');
+    
+ 	$this->back->view('products/add-vps', array('liste'=>$result));
+     
+ }
+ public function add_vps_view(){
+ 	$systeme = $this->host_model->get_all('systemes_exp');
+ 	$result = $this->host_model->get_all('frequences');
+ 	$this->back->view('products/add-vps', array('liste'=>$result,'sys'=>$systeme));
+
+ }
+    // add vps name
+ public function add_systeme(){
+ 	// recuperation des données
+ 	$data = array(
+         'os'   => $this->input->post('os'),
+         'name' => $this->input->post('name'),
+         
+ 	);
+ 	$query = $this->host_model->set('systemes_exp', $data);
+     	//var_dump($query);
+ 	$this->back->view('products/add-systeme-exploitation');
+     
+ }
+ public function add_systeme_view(){
+ 	$this->back->view('products/add-systeme-exploitation');
+
+ }
+
 }
