@@ -11,7 +11,7 @@ class Auth extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->library(array('ion_auth', 'form_validation','layout'));
+		$this->load->library(array('ion_auth', 'form_validation','layout','back'));
 		$this->load->model(array('host_model'));
 
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -22,7 +22,7 @@ class Auth extends CI_Controller
 	 */
 	public function index()
 	{
-
+     //$this->session->set_flashdata('users', $this->ion_auth->users()->result());
 		if (!$this->ion_auth->logged_in())
 		{
 			// redirect them to the login page
@@ -524,7 +524,7 @@ class Auth extends CI_Controller
 			if ($this->input->post('password'))
 			{
 				$this->form_validation->set_rules('password', $this->lang->line('edit_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[password_confirm]');
-				$this->form_validation->set_rules('password_confirm', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
+				$this->form_validation->set_rules('confirm_password', $this->lang->line('edit_user_validation_password_confirm_label'), 'required');
 			}
 
 			if ($this->form_validation->run() === TRUE)
@@ -615,12 +615,22 @@ class Auth extends CI_Controller
 		$this->data['first_name'] = array(
 			'name'  => 'first_name',
 			'id'    => 'first_name',
+			'class' => 'form-control',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('first_name', $user->first_name),
 		);
+		$this->data['email'] = array(
+			'name'  => 'email',
+			'id'    => 'email',
+			'class' => 'form-control',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('email', $user->email),
+		);
+
 		$this->data['last_name'] = array(
 			'name'  => 'last_name',
 			'id'    => 'last_name',
+			'class' => 'form-control',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('last_name', $user->last_name),
 		);
@@ -628,26 +638,58 @@ class Auth extends CI_Controller
 			'name'  => 'company',
 			'id'    => 'company',
 			'type'  => 'text',
+			'class' => 'form-control',
 			'value' => $this->form_validation->set_value('company', $user->company),
+		);
+		$this->data['city'] = array(
+			'name'  => 'city',
+			'id'    => 'city',
+			'class' => 'form-control',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('city', $user->city),
+		);
+		$this->data['address'] = array(
+			'name'  => 'address',
+			'id'    => 'address',
+			'class' => 'form-control',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('address', $user->address),
+		);
+		$this->data['country'] = array(
+			'name'  => 'country',
+			'id'    => 'country',
+			'class' => 'form-control',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('country', $user->country),
 		);
 		$this->data['phone'] = array(
 			'name'  => 'phone',
 			'id'    => 'phone',
+			'class' => 'form-control',
 			'type'  => 'text',
 			'value' => $this->form_validation->set_value('phone', $user->phone),
+		);
+		$this->data['postcode'] = array(
+			'name'  => 'postcode',
+			'id'    => 'postcode',
+			'class' => 'form-control',
+			'type'  => 'text',
+			'value' => $this->form_validation->set_value('postcode', $user->postcode),
 		);
 		$this->data['password'] = array(
 			'name' => 'password',
 			'id'   => 'password',
-			'type' => 'password'
+			'class' => 'form-control',
+			'type' => 'password',
 		);
 		$this->data['password_confirm'] = array(
 			'name' => 'password_confirm',
 			'id'   => 'password_confirm',
-			'type' => 'password'
+			'type' => 'password',
+			'class' => 'form-control',
 		);
 
-		$this->_render_page('auth/edit_user', $this->data);
+		$this->back->view('auth/edit_users', $this->data);
 	}
 
 	/**

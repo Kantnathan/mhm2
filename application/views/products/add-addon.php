@@ -2,13 +2,13 @@
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
-        Produit nom de domaine
+        Produit Addon
         <small>Ajout</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Gestion des produits</a></li>
         <li><a href="#">Forms</a></li>
-        <li class="active">nom de domaine</li>
+        <li class="active">Addon</li>
       </ol>
     </section>
 
@@ -20,31 +20,35 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Extension</h3>
+              <h3 class="box-title">Addon</h3>
             </div>
             <!-- /.box-header -->
-               <?php echo form_open("Hebergement_web_pour_developpeur/add_domain");?>
+               <?php echo form_open("Hebergement_web_pour_developpeur/add_addon");?>
               <div class="box-body">
                 <div class="col-md-6">
                   <div class="form-group">
-                  <label for="extension">Extension de domaine</label>
-                  <input type="text" class="form-control"  placeholder="Exemple : .com" name="extension">
-                 <?php echo "<p style=\"color: red;\">"; echo form_error('extension'); echo "</p>"; ?>
-                </div>
-
-                <div class="form-group">
-                  <label for="prix">Prix de l'extension</label>
-                  <input type="number" class="form-control" id="prix" placeholder="Prix de l'extension" name="prix">
+                  <label for="extension">Nom de l'addon</label>
+                  <input type="text" class="form-control"  placeholder="Exemple : ip dédié" name="name">
+                 <?php echo "<p style=\"color: red;\">"; echo form_error('name'); echo "</p>"; ?>
                 </div>
                 <div class="form-group">
-                  <label for="prix_renouv">Prix du renouvellement</label>
-                  <input type="number" class="form-control" id="prix_renouv" placeholder="Prix du renouvellement" name="prix_renouv">
+                  <label for="prix">Prix de l'Addon</label>
+                  <input type="number" class="form-control" id="prix" placeholder="Prix de l'addon" name="prix">
                 </div>
-                <div class="form-group">
-                  <label for="prix_transfert">Prix de transfert</label>
-                  <input type="text" class="form-control"  placeholder="Prix de transfert " name="prix_transfert">
+                   <div class="form-group">
+                  <label>Type de l'addon</label>
+                  <select class="form-control" name="type">
+                    <?php if ($type != NULL): $i = 0?>
+                            <?php  foreach ($type as $key => $value ): ?>
+                            <option value="<?php echo $type[$i]->type ;?>"><?php echo $type[$i]->type ;?></option>
+                            <?php $i = $i +1 ;?>
+                           <?php endforeach ;?>
+                           <?php endif ;?>
+                  </select>
                 </div>
-                
+                </div>
+                 <div class="col-md-6">
+                  
                      <div class="form-group">
                   <label>Frequence</label>
                   <select class="form-control" name="frequence">
@@ -56,19 +60,9 @@
                            <?php endif ;?>
                   </select>
                 </div>
-                </div>
-                 <div class="col-md-6">
-                  <div class="form-group">
-                  <label for="api">API</label>
-                  <input type="text" class="form-control"  placeholder="API " name="api">
-                </div>
-                <div class="form-group">
-                  <label>Conditions</label>
-                  <textarea class="form-control" rows="5" placeholder="Entrer ..." name="condition"></textarea>
-                </div>
                 <div class="form-group">
                   <label>Description de l'extension</label>
-                  <textarea class="form-control" rows="5" placeholder="Entrer ..." name="desc"></textarea>
+                  <textarea class="form-control" rows="4" placeholder="Entrer ..." name="desc"></textarea>
                 </div>
               </div>
             </div>

@@ -87,6 +87,7 @@ $lang['edit_user_subheading']                        = 'Veuillez entrer les donn
 $lang['edit_user_fname_label']                       = 'Prénom :';
 $lang['edit_user_lname_label']                       = 'Nom :';
 $lang['edit_user_company_label']                     = 'Société :';
+$lang['edit_user_address_label']                     = 'Adresse :';
 $lang['edit_user_email_label']                       = 'E-mail :';
 $lang['edit_user_phone_label']                       = 'Téléphone :';
 $lang['edit_user_password_label']                    = 'Mot de passe (si modifié) :';

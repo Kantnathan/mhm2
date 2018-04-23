@@ -29,6 +29,7 @@
   <!-- Daterange picker -->
   <link rel="stylesheet" href="<?= base_url()?>assets/bower_components/bootstrap-daterangepicker/daterangepicker.css">
   <!-- bootstrap wysihtml5 - text editor -->
+      <link href="<?= base_url()?>assets/css/bootstrap-formhelpers.css" rel="stylesheet">
   <link rel="stylesheet" href="<?= base_url()?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css">
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -43,7 +44,6 @@
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 <div class="wrapper">
-
   <header class="main-header">
     <!-- Logo -->
     <a href="index2.html" class="logo">
@@ -67,6 +67,7 @@
               <i class="fa fa-envelope-o"></i>
               <span class="label label-success">4</span>
             </a>
+            
             <ul class="dropdown-menu">
               <li class="header">You have 4 messages</li>
               <li>
@@ -262,7 +263,7 @@
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
               <img src="<?= base_url()?>assets/dist/img/avatar.png" class="user-image" alt="User Image">
-              <span class="hidden-xs">Mboahost Admin</span>
+              <span class="hidden-xs"><?php echo $this->ion_auth->user()->row()->first_name;?> <?php echo $this->ion_auth->user()->row()->last_name;?></span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
@@ -270,7 +271,8 @@
                 <img src="<?= base_url()?>assets/dist/img/avatar.png" class="img-circle" alt="User Image">
 
                 <p>
-                  Mboahost Admin - CEO
+                  <?php $id = $this->ion_auth->user()->row()->id; echo $this->ion_auth->user()->row()->first_name; ?>
+                   <?php echo $this->ion_auth->user()->row()->last_name;?> - CEO
                   <small>Membre depuis Nov. 2015</small>
                 </p>
               </li>
@@ -278,13 +280,12 @@
               <li class="user-body">
                 <div class="row">
                   <div class="col-xs-4 text-center">
-                    <a href="#">Followers</a>
+                    <a href="#">Historique</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Sales</a>
                   </div>
                   <div class="col-xs-4 text-center">
-                    <a href="#">Friends</a>
+                    <a href="#">Ticket express</a>
                   </div>
                 </div>
                 <!-- /.row -->
@@ -292,10 +293,10 @@
               <!-- Menu Footer-->
               <li class="user-footer">
                 <div class="pull-left">
-                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                  <a href="<?= base_url() ?>auth/edit_user/<?php echo($id)?>" class="btn btn-default btn-flat">Profil</a>
                 </div>
                 <div class="pull-right">
-                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                  <a href="<?= base_url() ?>auth/logout" class="btn btn-default btn-flat">Déconnexion</a>
                 </div>
               </li>
             </ul>
@@ -319,7 +320,7 @@
           <img src="<?= base_url()?>assets/dist/img/avatar.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Mboahost Admin</p>
+          <p><?php echo $this->ion_auth->user()->row()->first_name;?> <?php echo $this->ion_auth->user()->row()->last_name;?></p>
           <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
         </div>
       </div>
@@ -359,10 +360,11 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/add_domain_view"><i class="fa fa-plus-circle"></i>  Noms de domaines</a></li>
-            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/add_host_view"><i class="fa  fa-server"></i>  Hébèrgements</a></li>
-            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/add_vps_view"><i class="fa fa-linux"></i>  VPS</a></li>
-            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/add_systeme_view"><i class="fa fa-linux"></i>  Système d'exploitation</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_domaines"><i class="fa fa-plus-circle"></i>  Noms de domaines</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_hebergement"><i class="fa  fa-server"></i>  Hébèrgements</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_vps"><i class="fa fa-linux"></i>  VPS</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_exploitation"><i class="fa fa-linux"></i>  Système d'exploitation</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_addon"><i class="fa fa-object-group"></i>  Les Addons</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -437,6 +439,7 @@
 <!-- AdminLTE App -->
 <script src="<?= base_url()?>assets/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+  <script src="<?= base_url()?>assets/js/bootstrap-formhelpers.js"></script>
 <script src="<?= base_url()?>assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url()?>assets/dist/js/demo.js"></script>

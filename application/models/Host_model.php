@@ -24,7 +24,7 @@ class Host_model extends CI_Model
 	 */
 	public function get_all($table){
 		$query = $this->db->get($table);
-		$query = $this->db->result();
+		return $query->result();
 	}
 	public function ajouter_news($auteur, $titre, $contenu)
 	{

@@ -83,7 +83,7 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
          'frequence'  => $this->input->post('frequence'),
          'adresses_email'=> $this->input->post('nb_email'),
          'bande_passante'  => $this->input->post('bp'),
-         'sous-domaines'       => $this->input->post('nb_sous_domaine'),
+         'sous_domaines'       => $this->input->post('nb_sous_domaine'),
          'stockage_email'=> $this->input->post('st_email'),
          'pieces_jointes'  => $this->input->post('pjointes'),
          'comptes_ftp'  => $this->input->post('ftp'),
@@ -151,6 +151,74 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
  public function add_systeme_view(){
  	$this->back->view('products/add-systeme-exploitation');
 
+ }
+     // add addon name
+ public function add_addon(){
+ 	// recuperation des données
+ 	$data = array(
+         'nom'           => $this->input->post('name'),
+         'prix'          => $this->input->post('prix'),
+         'description'   => $this->input->post('desc'),
+         'frequence'     => $this->input->post('frequence'),
+         'type'          => $this->input->post('type'),
+         
+ 	);
+ 	$query = $this->host_model->set('addons', $data);
+     	//var_dump($query);
+ 	$result = $this->host_model->get_all('frequences');
+ 	$type = $this->host_model->get_all('addon_type');
+ 	$this->back->view('products/add-addon', array('liste'=>$result,'type'=> $type));
+     
+ }
+ public function add_addon_view(){
+ 	$result = $this->host_model->get_all('frequences');
+ 	$type = $this->host_model->get_all('addon_type');
+ 	$this->back->view('products/add-addon', array('liste'=>$result,'type'=> $type));
+
+ }
+
+ // liste des hebergements
+
+ public function liste_hebergement(){
+
+     $data = $this->host_model->get_all('produits_hebergements');
+    // var_dump($data);
+     $this->back->view('products/host-list', array('liste'=> $data));
+ }
+
+  // liste des domaine
+
+ public function liste_domaines(){
+
+     $data = $this->host_model->get_all('produits_domaines');
+    // var_dump($data);
+     $this->back->view('products/domain-list', array('liste'=> $data));
+ }
+
+  // liste des vps
+
+ public function liste_vps(){
+
+     $data = $this->host_model->get_all('produits_vps');
+     //var_dump($data);
+     $this->back->view('products/vps-list', array('liste'=> $data));
+ }
+
+ // liste des exploitation
+
+ public function liste_exploitation(){
+
+     $data = $this->host_model->get_all('systemes_exp');
+     //var_dump($data);
+     $this->back->view('products/systeme-exploitation-list', array('liste'=> $data));
+ }
+ // liste des addon
+
+ public function liste_addon(){
+
+     $data = $this->host_model->get_all('addons');
+     //var_dump($data);
+     $this->back->view('products/addon-list', array('liste'=> $data));
  }
 
 }
