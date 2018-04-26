@@ -71,8 +71,8 @@ class Auth extends CI_Controller
 				//if the login is successful
 				//redirect them back to the home page
 				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect(site_url(), 'refresh');
-				var_dump(site_url());
+				redirect(site_url().'/hebergement_web_pour_developpeur/admin', 'refresh');
+				//var_dump(site_url());
 			}
 			else
 			{
@@ -114,7 +114,7 @@ class Auth extends CI_Controller
 
 		// redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth/login', 'refresh');
+		redirect('auth', 'refresh');
 	}
 
 	/**
@@ -444,14 +444,14 @@ class Auth extends CI_Controller
 
 	$this->form_validation->set_rules('first_name', $this->lang->line('create_user_fname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
 	$this->form_validation->set_rules('last_name', $this->lang->line('create_user_lname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
-	$this->form_validation->set_rules('phone', $this->lang->line('create_user_phone_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+	$this->form_validation->set_rules('phone', $this->lang->line('create_user_phone_label'), 'trim|required|max_length[52]|regex_match[/[+][0-9]+[ ][0-9]+/]|encode_php_tags|is_unique[users.phone]');
 	$this->form_validation->set_rules('country', $this->lang->line('create_user_country_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
 	
 	$this->form_validation->set_rules('country', $this->lang->line('create_user_city_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
-	$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email');
+	$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email|is_unique[users.email]');
 	$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[confirm_password]');
 		$this->form_validation->set_rules('confirm_password', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
-	$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+	//$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 		if ($this->form_validation->run())
 		{
 			$email = strtolower($this->input->post('email'));
@@ -468,11 +468,16 @@ class Auth extends CI_Controller
 					'state'      => $this->input->post('state'),
 					'postcode'   => $this->input->post('postcode'),
 					'address'    => $this->input->post('address'),
-					'password'   => $this->input->post('password'),
-					'email'   => $this->input->post('email'),
 				);
-       $data = $this->host_model->set('users', $additional_data);
-       //var_dump($additional_data);
+		$data = array(
+			'password'   => $this->input->post('password'),
+			'email'   => $this->input->post('email'),
+		);
+	   $data = $this->ion_auth_model->set('users', $additional_data, $data);
+	   $this->session->set_flashdata('success-message', $this->ion_auth->lang->line('account_creation_successful'));
+	   //$this->session->flashdata('success-message', 'success creation of account');
+	   redirect("auth", 'refresh');  
+	   //var_dump($additional_data);
 	}
 	/*if ($this->form_validation->run() === TRUE && $this->ion_auth->register($password, $email, $additional_data))
 		{
@@ -483,8 +488,10 @@ class Auth extends CI_Controller
 		}*/
 	else{
 		//echo "oufffps";
-   $this->layout->view('auth/create_account');
+		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+		$this->layout->view('auth/create_account', 'refresh');
 		}
+	$this->layout->view('auth/create_account');
 	}
 	
 
@@ -863,46 +870,94 @@ class Auth extends CI_Controller
 	// create account function
 
 	public function create_account(){
-	/*$this->form_validation->set_rules('email', '"<?php echo lang(\'create_user_email_label\');?>"', 'trim|required|max_length[52]|alpha_dash|encode_php_tags|valid_email');
-	$this->form_validation->set_rules('last_name',    '"<?php echo lang(\'create_user_fname_label\');?>"',       'trim|required|min_length[5]|max_length[52]|alpha_dash|encode_php_tags');
-	$this->form_validation->set_rules('city', '"<?php echo lang(\'create_user_city_label\');?>"', 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
-	$this->form_validation->set_rules('password',    '"<?php echo lang(\'create_user_fname_label\');?>"',       'trim|required|min_length[5]|max_length[52]|alpha_dash|encode_php_tags|matches[password_confirm]');
-	$this->form_validation->set_rules('address', '"<?php echo lang(\'create_user_addresse_label\');?>"', 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
-	$this->form_validation->set_rules('phone',    '"<?php echo lang(\'create_user_fname_label\');?>"',       'trim|required|min_length[5]|max_length[52]|num|encode_php_tags');*/
-   $this->layout->view('auth/create_account');
+	
+		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_fname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_lname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('phone', $this->lang->line('create_user_phone_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('country', $this->lang->line('create_user_country_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		
+		$this->form_validation->set_rules('country', $this->lang->line('create_user_city_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email');
+		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[confirm_password]');
+		$this->form_validation->set_rules('confirm_password', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+
+		if ($this->form_validation->run()) {
+			$name = $this->input->post('name');
+			$pays = $this->input->post('pays');
+			$region = $this->input->post('region');
+			$ville = $this->input->post('ville');
+			$desc = $this->input->post('desc');
+			$quartier = $this->input->post('quartier');
+			$categorie = $this->input->post('categorie');
+
+			$data = array(
+						'first_name' => $this->input->post('first_name'),
+						'last_name'  => $this->input->post('last_name'),
+						'phone'      => $this->input->post('phone'),
+						'city'       => $this->input->post('city'),
+						'country'    => $this->input->post('country'),
+						'state'      => $this->input->post('state'),
+						'postcode'   => $this->input->post('postcode'),
+						'address'    => $this->input->post('address'),
+						'password'   => $this->input->post('password'),
+						'email'      => $this->input->post('email'),
+			);
+			$id = $this->host_model->set('users', $data);
+			var_dump($id);
+		} else {
+			$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+			redirect('auth/create_account');
+		}
+		$this->layout->view('auth/create_account');
 	}
 
 	 // insertion des données boncoin
 
-      public function insert(){
+    public function insert(){
 
-        $name = $this->input->post('name');
-        $pays = $this->input->post('pays');
-        $region = $this->input->post('region');
-        $ville = $this->input->post('ville');
-        $desc = $this->input->post('desc');
-        $quartier = $this->input->post('quartier');
-        $categorie = $this->input->post('categorie');
+		$this->form_validation->set_rules('first_name', $this->lang->line('create_user_fname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('last_name', $this->lang->line('create_user_lname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('phone', $this->lang->line('create_user_phone_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('country', $this->lang->line('create_user_country_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		
+		$this->form_validation->set_rules('country', $this->lang->line('create_user_city_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
+		$this->form_validation->set_rules('email', $this->lang->line('create_user_validation_email_label'), 'trim|required|valid_email');
+		$this->form_validation->set_rules('password', $this->lang->line('create_user_validation_password_label'), 'required|min_length[' . $this->config->item('min_password_length', 'ion_auth') . ']|max_length[' . $this->config->item('max_password_length', 'ion_auth') . ']|matches[confirm_password]');
+		$this->form_validation->set_rules('confirm_password', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
+		$this->form_validation->set_rules('password_confirm', $this->lang->line('create_user_validation_password_confirm_label'), 'required');
 
-        $data = array(
-                    'first_name' => $this->input->post('first_name'),
-					'last_name'  => $this->input->post('last_name'),
-					'phone'      => $this->input->post('phone'),
-					'city'       => $this->input->post('city'),
-					'country'    => $this->input->post('country'),
-					'state'      => $this->input->post('state'),
-					'postcode'   => $this->input->post('postcode'),
-					'address'    => $this->input->post('address'),
-					'password'   => $this->input->post('password'),
-					'email'      => $this->input->post('email'),
-        );
-        $id = $this->host_model->set('users', $data);
-        var_dump($id);
+		if ($this->form_validation->run()) {
+			$name = $this->input->post('name');
+			$pays = $this->input->post('pays');
+			$region = $this->input->post('region');
+			$ville = $this->input->post('ville');
+			$desc = $this->input->post('desc');
+			$quartier = $this->input->post('quartier');
+			$categorie = $this->input->post('categorie');
+
+			$data = array(
+						'first_name' => $this->input->post('first_name'),
+						'last_name'  => $this->input->post('last_name'),
+						'phone'      => $this->input->post('phone'),
+						'city'       => $this->input->post('city'),
+						'country'    => $this->input->post('country'),
+						'state'      => $this->input->post('state'),
+						'postcode'   => $this->input->post('postcode'),
+						'address'    => $this->input->post('address'),
+						'password'   => $this->input->post('password'),
+						'email'      => $this->input->post('email'),
+			);
+			$id = $this->host_model->set('users', $data);
+			var_dump($id);
+		} else {
+			redirect('create_account');
+		}
   
         //Get files data from database
         //$data['files'] = $this->file->getRows();
         //Pass the files data to view
         //$this->layout->view('bon-coin/liste_boncoins');
-      }
+    }
 
 }

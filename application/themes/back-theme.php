@@ -361,7 +361,7 @@
           </a>
           <ul class="treeview-menu">
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_domaines"><i class="fa fa-plus-circle"></i>  Noms de domaines</a></li>
-            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_hebergement"><i class="fa  fa-server"></i>  Hébèrgements</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_hebergement"><i class="fa  fa-server"></i>  Hébergements</a></li>
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_vps"><i class="fa fa-linux"></i>  VPS</a></li>
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_exploitation"><i class="fa fa-linux"></i>  Système d'exploitation</a></li>
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_addon"><i class="fa fa-object-group"></i>  Les Addons</a></li>

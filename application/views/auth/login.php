@@ -4,7 +4,20 @@
                 <div class="login-form-panel">
                     <div class="row">
                         <div class="col-sm-5 center-block">
-                            <div class="login-form">
+                            <div class="login-form">                            
+                                <?php if(null != $this->session->flashdata('message') || null != validation_errors()) { ?>
+                                <div class="alert alert-danger alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php echo $this->session->flashdata('message'); ?>
+                                    <?php echo validation_errors(); ?>
+                                </div>
+                                <?php } ?>
+                                <?php if(null != $this->session->flashdata('success-message')) { ?>
+                                <div class="alert alert-success alert-dismissible">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <?php echo $this->session->flashdata('success-message'); ?>
+                                </div>
+                                <?php } ?>
                                 <h2 class="title text-center"><?php echo lang('login_heading');?></h2>
                                 <form method="post" action="<?= base_url()?>auth/login">
                                         <label class="control-label"><?php echo lang('login_identity_label');?></label>

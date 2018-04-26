@@ -921,6 +921,11 @@ class Ion_auth_model extends CI_Model
 	 * @return    bool
 	 * @author    Mathew
 	 */
+
+	public function set($table,$additionaldata, $data) {
+		$this->register($data['password'], $data['email'], $additionaldata);
+	}
+
 	public function register( $password, $email, $additional_data = array(), $groups = array())
 	{
 		$this->trigger_events('pre_register');
@@ -956,8 +961,8 @@ class Ion_auth_model extends CI_Model
 
 		// Users table.
 		$data = array(
-			$this->identity_column => $identity,
-			'username' => $identity,
+			//$this->identity_column => $identity,
+			'username' => $email,
 			'password' => $password,
 			'email' => $email,
 			'ip_address' => $ip_address,
@@ -1027,6 +1032,7 @@ class Ion_auth_model extends CI_Model
 						  ->limit(1)
 						  ->order_by('id', 'desc')
 						  ->get($this->tables['users']);
+		//$query = $query->result();
 
 		if ($this->is_max_login_attempts_exceeded($identity))
 		{
