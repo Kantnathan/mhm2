@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 23 Avril 2018 à 23:53
+-- Généré le :  Mar 01 Mai 2018 à 02:59
 -- Version du serveur :  5.6.21
 -- Version de PHP :  5.6.3
 
@@ -80,6 +80,61 @@ INSERT INTO `addon_type` (`id`, `type`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `articles`
+--
+
+CREATE TABLE IF NOT EXISTS `articles` (
+`id` int(12) NOT NULL,
+  `titre` varchar(50) NOT NULL,
+  `categorie` varchar(50) NOT NULL,
+  `lien` varchar(100) NOT NULL,
+  `type` varchar(17) NOT NULL,
+  `extrait` text NOT NULL,
+  `contenu` text NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `articles`
+--
+
+INSERT INTO `articles` (`id`, `titre`, `categorie`, `lien`, `type`, `extrait`, `contenu`, `created_at`) VALUES
+(1, 'yeeeeeeeeeeeeeeee', 'Categorie Article', 'rien', 'blog', '<p>Saisissez le contenu ici&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp;</p>\r\n', '<p>Saisissez le contenu ici&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp;</p>\r\n', '2018-05-01 02:05:33'),
+(2, 'yeeeeeeeeeeeeeeee', 'Categorie Article', 'rien', 'blog', '<p>Saisissez le contenu ici&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp;</p>\r\n', '<p>Saisissez le contenu ici&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp; &nbsp; CKEDITOR.replace(&#39;contenu&#39;)<br />\r\n&nbsp;</p>\r\n', '2018-05-01 02:11:15'),
+(3, 'Les inséparable', 'Categorie Article', 'http://localhost/afoup/blog/ajout_article', 'blog', '<p>Saisissez le contenu iciSaisissez le contenu iciSaisissez le contenu iciSaisissez le contenu ici</p>\r\n', '<p>Saisissez le contenu iciSaisissez le contenu iciSaisissez le contenu iciSaisissez le contenu ici</p>\r\n', '2018-05-01 02:13:19'),
+(4, 'Comment héberger mon site web', 'Informatique', 'http://localhost/mboahost/blog/Article_view', 'article', '<p><strong><img alt="yessss" src="https://www.google.cm/imgres?imgurl=https%3A%2F%2Fi.eurosport.com%2F2014%2F06%2F15%2F1258522-27162007-2560-1440.jpg%3Fw%3D1050&amp;imgrefurl=https%3A%2F%2Fwww.eurosport.fr%2Ffootball%2Fcameroun-eto-o-annonce-sa-retraite-internationale_sto4376521%2Fstory.shtml&amp;docid=4FSCWBsfOWlBeM&amp;tbnid=tUfhT44JxMEfwM%3A&amp;vet=10ahUKEwiwofLBpuPaAhUBr6QKHRD4B0cQMwgzKAEwAQ..i&amp;w=1050&amp;h=590&amp;bih=669&amp;biw=1280&amp;q=Eto%27o&amp;ved=0ahUKEwiwofLBpuPaAhUBr6QKHRD4B0cQMwgzKAEwAQ&amp;iact=mrc&amp;uact=8" style="float:left" />&nbsp;Bonsoir &agrave; tous et &agrave; toutes aujourdui nous verons comment h&eacute;berger son site web sur mboahost</strong></p>\r\n', '<p><strong><img alt="yessss" src="https://www.google.cm/imgres?imgurl=https%3A%2F%2Fi.eurosport.com%2F2014%2F06%2F15%2F1258522-27162007-2560-1440.jpg%3Fw%3D1050&amp;imgrefurl=https%3A%2F%2Fwww.eurosport.fr%2Ffootball%2Fcameroun-eto-o-annonce-sa-retraite-internationale_sto4376521%2Fstory.shtml&amp;docid=4FSCWBsfOWlBeM&amp;tbnid=tUfhT44JxMEfwM%3A&amp;vet=10ahUKEwiwofLBpuPaAhUBr6QKHRD4B0cQMwgzKAEwAQ..i&amp;w=1050&amp;h=590&amp;bih=669&amp;biw=1280&amp;q=Eto%27o&amp;ved=0ahUKEwiwofLBpuPaAhUBr6QKHRD4B0cQMwgzKAEwAQ&amp;iact=mrc&amp;uact=8" style="float:left" />&nbsp;Bonsoir &agrave; tous et &agrave; toutes aujourdui nous verons comment h&eacute;berger son site web sur mboahost</strong></p>\r\n', '2018-05-01 02:55:07');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categorie`
+--
+
+CREATE TABLE IF NOT EXISTS `categorie` (
+`id` int(11) NOT NULL,
+  `name` varchar(200) NOT NULL,
+  `description` text NOT NULL,
+  `created_at` datetime NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
+
+--
+-- Contenu de la table `categorie`
+--
+
+INSERT INTO `categorie` (`id`, `name`, `description`, `created_at`) VALUES
+(1, 'yes', 'ooooooooooooooooggggggggg', '2018-04-25 21:34:51'),
+(2, 'Agriculture', 'nous allons parler de l''agriculture', '2018-04-25 21:37:14'),
+(3, 'Innovation', 'Toutes les innovations dans le secteur agro-industriel seront présenté ici', '2018-04-25 21:50:41'),
+(4, 'Innovation', 'Toutes les innovations dans le secteur agro-industriel seront présenté ici', '2018-04-25 21:51:36'),
+(5, 'Agropastoral', 'Tous sur l''agropastoral', '2018-04-25 21:52:13'),
+(6, 'Informatique', 'InformatiqueInformatique', '2018-05-01 01:33:54'),
+(7, 'Informatique', 'InformatiqueInformatique', '2018-05-01 01:34:37'),
+(8, 'Informatique', 'InformatiqueInformatique', '2018-05-01 01:36:53'),
+(9, 'oups', 'oooooooooooooooooooooooooooooooooooo', '2018-05-01 02:47:36');
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `ci_sessions`
 --
 
@@ -109,6 +164,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`
 ('4lsms1f88pc4kcbm6v6a4k7cbo1tkf6n', '::1', '', 1524493511, '__ci_last_regenerate|i:1524493223;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"4ylwabXR";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"RUa0G5XzTBylLexpnsO4";'),
 ('4qnij86rvg7cbuslo4tee6rpnvj9r51g', '::1', '', 1524396763, '__ci_last_regenerate|i:1524396568;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065219";last_check|i:1524396588;csrfkey|s:8:"TJF6Ymla";__ci_vars|a:2:{s:7:"csrfkey";s:3:"old";s:9:"csrfvalue";s:3:"old";}csrfvalue|s:20:"0UOYEZn3NTeltRaogsdM";'),
 ('59s24o5vpba5fqtoocjgl7903hick88q', '::1', '', 1524505513, '__ci_last_regenerate|i:1524505512;'),
+('65skv08g2stttq95vnfjmu7nlrufj9a6', '::1', '', 1525135078, '__ci_last_regenerate|i:1525134941;identity|s:21:"hervecodeur@gmail.com";email|s:21:"hervecodeur@gmail.com";user_id|s:1:"4";old_last_login|N;last_check|i:1525135065;csrfkey|s:8:"dzcQBp0U";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"vDfdFNwERHKklqz6JWx5";'),
 ('6eobjak11qfafumttf0h3ff3nn6fmi8j', '::1', '', 1524062122, '__ci_last_regenerate|i:1524062122;'),
 ('6lsrk8iojfov50a2j38c47k71a7jms7n', '::1', '', 1524495378, '__ci_last_regenerate|i:1524495186;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;__ci_vars|a:1:{s:7:"message";s:3:"old";}message|s:50:"<p>Compte utilisateur mis à jour avec succès</p>";'),
 ('6s2jpai85i0j43mj43ess75si26m81in', '::1', '', 1524056362, '__ci_last_regenerate|i:1524056361;'),
@@ -131,6 +187,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`
 ('djmr5tslauedv21f3r1mdg4amajqauv6', '::1', '', 1524389761, '__ci_last_regenerate|i:1524389761;'),
 ('e0dnl8msh16qvin2ho47mdut77gifofe', '::1', '', 1524489142, '__ci_last_regenerate|i:1524489142;'),
 ('e2remhg13cjiu7vu3cj1tsjhabr91hsa', '::1', '', 1524072098, '__ci_last_regenerate|i:1524072097;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
+('f7ram5m0ig2o61kakcdvi6ebmfr2c850', '::1', '', 1524521264, '__ci_last_regenerate|i:1524521250;message|s:108:"<p>Compte temporairement bloqué suite à de trop nombreuses tentatives.  Veuillez réessayer plus tard.</p>";__ci_vars|a:1:{s:7:"message";s:3:"new";}'),
 ('fg9bq4lftth812mg5k74cpg4djvjfnl9', '::1', '', 1524389430, '__ci_last_regenerate|i:1524389429;'),
 ('fgfia8cbbdfvenc8bgro4v0o1ij2rvsc', '::1', '', 1524059896, '__ci_last_regenerate|i:1524059896;'),
 ('fgv91p5gene8k6v23g7rjd52sl9b305f', '::1', '', 1524491548, '__ci_last_regenerate|i:1524491291;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"S8WqMUT4";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"zEF3vWhuirMDBSO8Tb0A";'),
@@ -144,6 +201,8 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`
 ('hn70afdo7h60q2qtcjvgnv9iv8sjp09f', '::1', '', 1524490530, '__ci_last_regenerate|i:1524490530;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524487471";last_check|i:1524489855;csrfkey|s:8:"0i3Hw7hO";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"TJF6YmlaOCPQqSpXke10";'),
 ('i3ouphkb9gr22jo7snr90t4at15v4enp', '::1', '', 1524506750, '__ci_last_regenerate|i:1524506568;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524489855";last_check|i:1524506177;csrfkey|s:8:"rKeTxcPX";__ci_vars|a:2:{s:7:"csrfkey";s:3:"old";s:9:"csrfvalue";s:3:"old";}csrfvalue|s:20:"gD4aKUu0nGP9p2XQF5Lr";'),
 ('ib3tpnat1gpg27nqsdnqspm723fr8ncf', '::1', '', 1524062615, '__ci_last_regenerate|i:1524062615;'),
+('ic62rd1di71btijr31phbddi3krh1h26', '::1', '', 1525135574, '__ci_last_regenerate|i:1525135357;identity|s:21:"hervecodeur@gmail.com";email|s:21:"hervecodeur@gmail.com";user_id|s:1:"4";old_last_login|N;last_check|i:1525135065;'),
+('jbm5d4v9hut1tl6e7b9ntaahb1hoes8o', '::1', '', 1524521045, '__ci_last_regenerate|i:1524520840;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524506177";last_check|i:1524520958;csrfkey|s:8:"5O36YCLe";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"OZFt1k2vUglR4nKLf6XE";'),
 ('jj2375t9lunflife8nromck93u2pjuoi', '::1', '', 1524495738, '__ci_last_regenerate|i:1524495671;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"ZTNGfuam";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"TjzL6IpmnOGv2HiWulfC";'),
 ('juankghbgcol01vefvt78dm981rg7pek', '::1', '', 1524069577, '__ci_last_regenerate|i:1524069577;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
 ('kca4sp6loealquipnblk8l0ms4bjtjn3', '::1', '', 1524494710, '__ci_last_regenerate|i:1524494487;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"Ur7R1bL3";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"y0dhwIeL79VfMD5q3bsc";'),
@@ -157,11 +216,14 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`
 ('n39m97inhql5588d72jstb6ectbuvs7o', '::1', '', 1524494987, '__ci_last_regenerate|i:1524494874;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"n4uDmCM0";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"WZys4PtIYbng3fjO2S6q";'),
 ('na07vmmiergo9sg90emk5057b3t3nsdf', '::1', '', 1524487492, '__ci_last_regenerate|i:1524487492;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"oBODdPig";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"JCTve5K90GmkU3HNjdZX";'),
 ('ngf6hp93fjjhufv4p0usibb0m3dv06s7', '::1', '', 1524068680, '__ci_last_regenerate|i:1524068680;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
+('npl8e88dp5c654ejaio23ng31qkc3pes', '::1', '', 1525134055, '__ci_last_regenerate|i:1525134054;'),
 ('nvl8ab7h97sbluu6ui2lnrp9ren8gp5t', '::1', '', 1524395556, '__ci_last_regenerate|i:1524395556;'),
 ('o0id5t5ibf077e2pgd29esg463qf68u8', '::1', '', 1524066726, '__ci_last_regenerate|i:1524066726;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
 ('ogi6bu338ii1hbke2qi9u1sh24qlim48', '::1', '', 1524518520, '__ci_last_regenerate|i:1524518234;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524489855";last_check|i:1524506177;csrfkey|s:8:"42vCSQa1";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"kO18Da4YfFIcLqn6PEZ3";'),
+('oigk5fmb5amb1c35sbmviprqbknphi0v', '::1', '', 1525134475, '__ci_last_regenerate|i:1525134474;'),
 ('ov8v1h8rpcu4ri827f79q8biecb3u2kq', '::1', '', 1524063435, '__ci_last_regenerate|i:1524063434;'),
 ('pfm4t1sedr0sekutvpvrq74t71nnusfk', '::1', '', 1524067460, '__ci_last_regenerate|i:1524067460;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
+('q2c20imlj0nnpbi669udch1mtipafi4l', '::1', '', 1525135665, '__ci_last_regenerate|i:1525135665;identity|s:21:"hervecodeur@gmail.com";email|s:21:"hervecodeur@gmail.com";user_id|s:1:"4";old_last_login|N;last_check|i:1525135065;'),
 ('qd76kh6tc8udenu7u9qoikqfl2olo7kj', '::1', '', 1524489868, '__ci_last_regenerate|i:1524489666;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"ImkjOnwX";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"DM2IFpEVTBCUf6gldWij";'),
 ('qoav8q8o3phidn7v1je7a14ornau57k4', '::1', '', 1524058209, '__ci_last_regenerate|i:1524058209;'),
 ('rb3fm3g4dtjsslv97k5fo47rqom91lvl', '::1', '', 1524058918, '__ci_last_regenerate|i:1524058918;'),
@@ -174,6 +236,7 @@ INSERT INTO `ci_sessions` (`id`, `ip_address`, `user_agent`, `timestamp`, `data`
 ('td7pcq7k86gen3338935c3u6u1tbpojj', '::1', '', 1524504810, '__ci_last_regenerate|i:1524504809;'),
 ('thagovsrp0skb5i9e5onai136m6uhl5h', '::1', '', 1524066323, '__ci_last_regenerate|i:1524066323;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
 ('u6i01040al1a6nrf9r2hunpitfv54022', '::1', '', 1524504810, '__ci_last_regenerate|i:1524504809;'),
+('uccq9a54fn8ps29ncdu8rrhth7gc3prc', '::1', '', 1525136107, '__ci_last_regenerate|i:1525136107;identity|s:21:"hervecodeur@gmail.com";email|s:21:"hervecodeur@gmail.com";user_id|s:1:"4";old_last_login|N;last_check|i:1525135065;'),
 ('v3i3o6ng0ob6o0m8gd1gf3u1ghbjqvji', '::1', '', 1524065578, '__ci_last_regenerate|i:1524065577;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524065137";last_check|i:1524065219;'),
 ('v5o59car1uub1pab111fsbs1bks48q8p', '::1', '', 1524489049, '__ci_last_regenerate|i:1524488954;identity|s:15:"admin@admin.com";email|s:15:"admin@admin.com";user_id|s:1:"1";old_last_login|s:10:"1524396588";last_check|i:1524487471;csrfkey|s:8:"fgahkxDj";__ci_vars|a:2:{s:7:"csrfkey";s:3:"new";s:9:"csrfvalue";s:3:"new";}csrfvalue|s:20:"YdzVuZ7M08AUB2RCDhmb";'),
 ('v7om91heu46h14ctuevn2ncf0nnr7ira', '::1', '', 1524061059, '__ci_last_regenerate|i:1524061058;'),
@@ -253,7 +316,14 @@ CREATE TABLE IF NOT EXISTS `login_attempts` (
   `ip_address` varchar(45) NOT NULL,
   `login` varchar(100) NOT NULL,
   `time` int(11) unsigned DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+--
+-- Contenu de la table `login_attempts`
+--
+
+INSERT INTO `login_attempts` (`id`, `ip_address`, `login`, `time`) VALUES
+(4, '::1', 'eleguealamaherve@gmail.com', 1525134953);
 
 -- --------------------------------------------------------
 
@@ -430,16 +500,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `postcode` varchar(60) NOT NULL,
   `address` varchar(88) NOT NULL,
   `state` varchar(50) NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `users`
 --
 
 INSERT INTO `users` (`id`, `ip_address`, `username`, `password`, `salt`, `email`, `activation_code`, `forgotten_password_code`, `forgotten_password_time`, `remember_code`, `created_on`, `last_login`, `active`, `first_name`, `last_name`, `company`, `phone`, `city`, `country`, `postcode`, `address`, `state`) VALUES
-(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'itMl577y2UH05GH9PJKxy.', 1268889823, 1524506177, 1, 'Admin', 'istrator', 'ADMIN', '0', '', '', '', '', ''),
-(2, '::1', 'eleguealamaherve@gmail.com', '$2y$08$sWDsc/Pa5xD8Wkn8gl4wT.uKqs6k8.r2PgNO4wI9tmmfKpNid1bJK', NULL, 'eleguealamaherve@gmail.com', NULL, NULL, NULL, 'qr839WnRAJZI.bdzKj.wne', 1520942685, 1520946470, 1, 'Herve', 'Elegue', 'Agrisoft', '655923687', '', '', '', '', ''),
-(3, '', NULL, 'le codeur!!!', NULL, 'eleguealamaherve@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, 1, 'Mboahost', 'tous', 'Agrisoft', '655923687', '', 'CM', '', '', '');
+(1, '127.0.0.1', 'administrator', '$2a$07$SeBknntpZror9uyftVopmu61qg0ms8Qv1yV6FG.kQOSM.9QhmTo36', '', 'admin@admin.com', '', NULL, NULL, 'itMl577y2UH05GH9PJKxy.', 1268889823, 1525134886, 1, 'Admin', 'istrator', 'ADMIN', '0', '', '', '', '', ''),
+(2, '::1', 'eleguealamaherve@gmail.com', '$2y$08$S7AsIXm53wr.RwGMPbMEkOisNPeQNawrHQR.XJ/cCmM32ezX4Rh7y', NULL, 'eleguealamaherve@gmail.com', NULL, NULL, NULL, 'qr839WnRAJZI.bdzKj.wne', 1520942685, 1520946470, 1, 'Herve', 'Elegue', 'Agrisoft', '655923687', 'Yaounde', 'CM', '237', 'Mvog-Mbi', 'EST'),
+(3, '', NULL, 'le codeur!!!!!', NULL, 'eleguealamaherve@gmail.com', NULL, NULL, NULL, NULL, 0, NULL, 1, 'Mboahost', 'tous', 'Agrisoft', '655923687', '', 'CM', '', '', ''),
+(4, '::1', 'hervecodeur@gmail.com', '$2y$08$aa9/tyGdpo0KHLs2koGlVuPIg2TZSM2cl8ztTC.rgObwHJnYVc2L.', NULL, 'hervecodeur@gmail.com', NULL, NULL, NULL, NULL, 1525135036, 1525135065, 1, 'Herve', 'Elegue', NULL, '+237 655923687', 'Yaounde', 'CM', '237', 'Mvog-Mbi', 'CEN');
 
 -- --------------------------------------------------------
 
@@ -451,7 +522,7 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 `id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL,
   `group_id` mediumint(8) unsigned NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 --
 -- Contenu de la table `users_groups`
@@ -460,8 +531,9 @@ CREATE TABLE IF NOT EXISTS `users_groups` (
 INSERT INTO `users_groups` (`id`, `user_id`, `group_id`) VALUES
 (1, 1, 1),
 (2, 1, 2),
-(3, 2, 2),
-(7, 3, 1);
+(8, 2, 2),
+(7, 3, 1),
+(9, 4, 2);
 
 --
 -- Index pour les tables exportées
@@ -483,6 +555,18 @@ ALTER TABLE `addons_dist`
 -- Index pour la table `addon_type`
 --
 ALTER TABLE `addon_type`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `articles`
+--
+ALTER TABLE `articles`
+ ADD PRIMARY KEY (`id`);
+
+--
+-- Index pour la table `categorie`
+--
+ALTER TABLE `categorie`
  ADD PRIMARY KEY (`id`);
 
 --
@@ -565,6 +649,16 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `addon_type`
 MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
+-- AUTO_INCREMENT pour la table `articles`
+--
+ALTER TABLE `articles`
+MODIFY `id` int(12) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
+--
+-- AUTO_INCREMENT pour la table `categorie`
+--
+ALTER TABLE `categorie`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
+--
 -- AUTO_INCREMENT pour la table `groups`
 --
 ALTER TABLE `groups`
@@ -573,7 +667,7 @@ MODIFY `id` mediumint(8) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT pour la table `login_attempts`
 --
 ALTER TABLE `login_attempts`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `news`
 --
@@ -603,12 +697,12 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 -- AUTO_INCREMENT pour la table `users`
 --
 ALTER TABLE `users`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT pour la table `users_groups`
 --
 ALTER TABLE `users_groups`
-MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=10;
 --
 -- Contraintes pour les tables exportées
 --

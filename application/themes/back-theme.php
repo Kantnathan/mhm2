@@ -369,6 +369,19 @@
         </li>
         <li class="treeview">
           <a href="#">
+            <i class="fa fa-commenting"></i>
+            <span>Blog</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">2</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url() ?>blog/cat_list"><i class="fa fa-circle-o"></i> Catégorie</a></li>
+            <li><a href="<?= base_url() ?>blog/article_list"><i class="fa fa-circle-o"></i> Articles</a></li>
+          </ul>
+        </li>
+        <li class="treeview">
+          <a href="#">
             <i class="fa fa-info"></i> <span>Informations</span>
             <span class="pull-right-container">
               <i class="fa fa-angle-left pull-right"></i>
@@ -443,6 +456,20 @@
 <script src="<?= base_url()?>assets/dist/js/pages/dashboard.js"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="<?= base_url()?>assets/dist/js/demo.js"></script>
+<script src="<?= base_url()?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script src="<?= base_url()?>assets/plugins/iCheck/icheck.min.js"></script>
+<script src="<?= base_url()?>assets/bower_components/ckeditor/ckeditor.js"></script>
+<!-- Bootstrap WYSIHTML5 -->
+<script src="<?= base_url()?>assets/plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.all.min.js"></script>
+<script>
+  $(function () {
+    // Replace the <textarea id="editor1"> with a CKEditor
+    // instance, using default configuration.
+    CKEDITOR.replace('editor1')
+    //bootstrap WYSIHTML5 - text editor
+    $('.textarea').wysihtml5()
+  })
+</script>
 <script type="text/javascript">
   //Initialize Select2 Elements
     $('.select2').select2();
