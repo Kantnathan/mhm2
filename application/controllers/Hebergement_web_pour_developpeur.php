@@ -46,7 +46,7 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
                 $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
             }
 
-            $this->layout->view('auth/index', $this->data);
+            $this->back->view('back/administrator', $this->data);
         }
 	}
 
