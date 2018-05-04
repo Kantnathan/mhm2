@@ -19,8 +19,10 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->layout->view('home');
-	}
+        $result = $this->host_model->get_all('produits_domaines');
+        $this->layout->view('home', array('domaines'=>$result));
+    }
+    
 	public function admin()
 	{
         if (!$this->ion_auth->logged_in())
@@ -46,7 +48,7 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
                 $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
             }
 
-            $this->back->view('back/administrator', $this->data);
+            $this->layout->view('auth/index', $this->data);
         }
 	}
 
@@ -85,15 +87,40 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
  	$query = $this->host_model->set('produits_domaines', $data);
      	//var_dump($query);
      
- 	$result = $this->host_model->get_all('frequences');
+     $result = $this->host_model->get_all('frequences');
+     $apiresult = $this->host_model->get_all('api_domaines');
     
- 	$this->back->view('products/add-domain-name', array('liste'=>$result));
+ 	$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
 
      
  }
  public function add_domain_view(){
- 	$result = $this->host_model->get_all('frequences');
- 	$this->back->view('products/add-domain-name', array('liste'=>$result));
+     $result = $this->host_model->get_all('frequences');
+     $apiresult = $this->host_model->get_all('api_domaines');
+ 	$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
+
+ }
+
+ public function add_domain_api(){
+ 	// recuperation des données
+ 	$data = array(
+         'name'  => $this->input->post('nomapi'),
+         'url'       => $this->input->post('urlapi'),
+         'apikey1'=> $this->input->post('key1'),
+         'apikey2'  => $this->input->post('key2'),
+         'apikey3'  => $this->input->post('key3'),
+ 	);
+ 	$query = $this->host_model->set('api_domaines', $data);
+     	//var_dump($query);
+     
+ 	redirect('add_domain', 'refresh');
+
+     
+ }
+
+ public function add_domain_api_view(){
+ 	//$result = $this->host_model->get_all('frequences');
+ 	$this->back->view('products/add-domain-api');
 
  }
   // add host name

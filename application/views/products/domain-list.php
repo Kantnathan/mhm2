@@ -31,6 +31,9 @@
               <a class="btn btn-app bg-olive" href="<?= base_url()?>hebergement_web_pour_developpeur/add_domain_view">
                 <i class="fa fa-plus"></i> Ajouter
               </a>
+              <a class="btn btn-app bg-olive" href="<?= base_url()?>hebergement_web_pour_developpeur/add_domain_api_view">
+                <i class="fa fa-plus"></i> Ajouter API
+              </a>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>

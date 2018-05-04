@@ -32,26 +32,17 @@
      <div class="row">
         <div class="col-sm-12 col-md-6 col-xs-12">
            <ul class="list-inline">
-              <li><a href="#"><i class="fa fa-phone-square"></i><span>+1-845-180-1530</span></a></li>
+              <li><a href="#"><i class="fa fa-phone-square"></i><span>+237 695 15 25 68</span></a></li>
               <li><a href="#"><i class="fa fa-commenting"></i><span> Live Chat</span></a></li>
               <li><a href="#"><i class="fa fa-headphones"></i><span> Support</span></a></li>
               <li><div class="select-language">
 				  <ul class="nav navbar-nav">
 						   <li class="dropdown">
-								 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								 <a href="<?php echo base_url(); ?>LanguageSwitcher/switchLang/english" class="dropdown-toggle" data-toggle="dropdown">
 								   <img src="<?= base_url()?>assets/images/flags/US.png"/>English(US)<b class="caret"></b>
 								 </a>
 								 <ul class="dropdown-menu">
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/DE.png"/> Deutsch</a></li>
-								   <li><a href="<?php echo base_url(); ?>LanguageSwitcher/switchLang/english"><img src="<?= base_url()?>assets/images/flags/GB.png"/> English(UK)</a></li>
 								   <li><a href="<?php echo base_url(); ?>LanguageSwitcher/switchLang/french"><img src="<?= base_url()?>assets/images/flags/FR.png"/> French</a></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/RO.png"/> Roman</a></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/IT.png"/> Italian</a></li>
-								   <li class="divider"></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/ES.png"/> Espanol </a></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/BR.png"/> Portugees </a></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/JP.png"/> Japanese </a></li>
-								   <li><a href="#"><img src="<?= base_url()?>assets/images/flags/TR.png"/> Turkish </a></li>
 								 </ul>
 						   </li>
 					 </ul>
@@ -64,7 +55,7 @@
               <a class="btn waves-effect waves-light btn-sm btn-success" href="limited-offers.html" title=""><i class="fa fa-gift"></i> Limited Offer</a>
               <a class="btn waves-effect waves-light btn-sm btn-pink" href="combo-offers.html" title=""><i class="fa fa-gift"></i> Combo Offers </a>
               <a class="btn waves-effect waves-light btn-sm btn-default" href="#" title=""><i class="fa fa-pencil"></i>  Sign Up </a>
-              <a class="btn waves-effect waves-light btn-sm btn-warning" href="login2.html" title=""><i class="fa fa-user"></i> Account Login</a>
+              <a class="btn waves-effect waves-light btn-sm btn-warning" href="<?php echo base_url(); ?>auth/login" title=""><i class="fa fa-user"></i> Account Login</a>
            </div>
         </div>
      </div>
@@ -76,7 +67,7 @@
      <div class="row">
         <div class="col-sm-12 col-xs-12 col-md-3">
            <div class="logo">
-              <a href="index.html"><img src="<?= base_url()?>assets/images/logo.png" alt="" />
+              <a href="<?php echo base_url(); ?>"><img src="<?= base_url()?>assets/images/logo.png" alt="" />
               </a>
            </div>
         </div>
@@ -106,7 +97,7 @@
                  <li>
                     <a href="#"><i class="fa fa-globe"></i>Domain Pricing</a>
                     <ul>
-                       <li><a href="single-year-pricing.html">Single Year Pricing</a></li>
+                       <li><a href="<?php echo base_url(); ?>nom_de_domaine">Enregistrement de Nom de Domaine</a></li>
                        <li><a href="single-year-pricing2.html">Single Year Pricing 2</a></li>
                        <li><a href="multi-year-pricing.html">Multiple Year Pricing</a></li>
                     </ul>

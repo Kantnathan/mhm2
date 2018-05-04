@@ -60,7 +60,14 @@
                  <div class="col-md-6">
                   <div class="form-group">
                   <label for="api">API</label>
-                  <input type="text" class="form-control"  placeholder="API " name="api">
+                  <select class="form-control" name="api">
+                    <?php if ($apis != NULL): $i = 0?>
+                            <?php  foreach ($apis as $key => $value ): ?>
+                            <option value="<?php echo $value->name ;?>"><?php echo $value->name ;?></option>
+                            <?php $i = $i +1 ;?>
+                           <?php endforeach ;?>
+                    <?php endif ;?>
+                  </select>
                 </div>
                 <div class="form-group">
                   <label>Conditions</label>

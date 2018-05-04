@@ -14,10 +14,12 @@
                           <input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
                           <span class="selection">
                              <select name="tld" class="e1">
-                                <option>.com</option>
-                                <option>.net</option>
-                                <option>.org</option>
-                                <option>.eu</option>
+                                <?php if ($domaines != NULL): $i = 0?>
+                                  <?php  foreach ($domaines as $key => $value ): ?>
+                                    <option value="<?php echo $value->extension ;?>"><?php echo $value->extension ;?></option>
+                                    <?php $i = $i +1 ;?>
+                                  <?php endforeach ;?>
+                                <?php endif ;?>
                              </select>
                           </span>
                        </div>

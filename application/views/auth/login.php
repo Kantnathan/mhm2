@@ -23,7 +23,7 @@
                                         <label class="control-label"><?php echo lang('login_identity_label');?></label>
                                     <input type="text" name="identity" size="50" placeholder="<?php echo lang('create_user_placeholder_label');?> <?php echo lang('create_user_email_label');?>" />
                                     <label class="control-label"><?php echo lang('login_password_label');?></label>
-                                    <input type="text" name="password" size="50" placeholder="<?php echo lang('create_user_placeholder_label');?> <?php echo lang('create_user_fname_label');?>" />
+                                    <input type="password" name="password" size="50" placeholder="<?php echo lang('create_user_placeholder_label');?> <?php echo lang('create_user_fname_label');?>" />
                                     <?php echo form_error('fisrt_name'); ?>
                                     <p class="btn waves-effect waves-light btn-default btn-block"><a href="#"><?php echo lang('forgot_password_heading');?></a></p>
                                     <input type="submit"  class="btn waves-effect waves-light btn-success btn-block" value="<?php echo lang('login_submit_btn');?>" />
