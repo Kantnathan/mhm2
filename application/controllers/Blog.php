@@ -87,4 +87,36 @@ class Blog extends CI_Controller {
 
    	$this->back->view('blog/articles-list', array('liste'=>$data));
    }
+
+      // update statut categorie
+   public function statut_categorie($id){
+   $data = $this->host_model->getbyid('categorie', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('categorie', $id, 0);
+   }else{
+     $this->host_model->update_statut('categorie', $id, 1);
+
+   };
+   $this->cat_list();
+   }
+
+   // update statut article
+   public function statut_article($id){
+   $data = $this->host_model->getbyid('articles', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('articles', $id, 0);
+   }else{
+     $this->host_model->update_statut('articles', $id, 1);
+
+   };
+   $this->article_list();
+   }
 }

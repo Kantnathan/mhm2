@@ -380,6 +380,32 @@
             <li><a href="<?= base_url() ?>blog/article_list"><i class="fa fa-circle-o"></i> Articles</a></li>
           </ul>
         </li>
+          <li class="treeview">
+          <a href="#">
+            <i class="fa  fa-navicon "></i>
+            <span>Menus</span>
+            <span class="pull-right-container">
+              <span class="label label-success pull-right">2</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url() ?>menus/menu_view"><i class="fa fa-plus-square text-yellow"></i> Ajouter menu</a></li>
+            <li><a href="<?= base_url() ?>menus/menus_list"><i class="fa fa-th-list text-success"></i> Tous les menus</a></li>
+          </ul>
+        </li>
+         <li class="treeview">
+          <a href="#">
+            <i class="fa fa-wrench"></i>
+            <span>Assistance</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">2</span>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+            <li><a href="<?= base_url() ?>assistance/ticket_list"><i class="fa fa-envelope text-yellow"></i> Ouvrir un ticket</a></li>
+            <li><a href="<?= base_url() ?>assistance/temoignage_list"><i class="fa fa-quote-left text-success"></i> Témoignages</a></li>
+          </ul>
+        </li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-info"></i> <span>Informations</span>

@@ -66,6 +66,24 @@ class Host_model extends CI_Model
 				->where('id', (int) $id)
 				->update($this->table);
 	}
+
+
+		/**
+	 *	Édite un statut existant.
+	 *	
+	 *	@param integer $id	L'id de l'element'
+	 *	@param auteur: herve elegue
+	 *	@param date:11/05/2018
+	 *	@return bool		Le résultat de la requête
+	 */
+	public function update_statut($table, $id, $statut)
+	{
+			$this->db->set('statut', $statut);
+		
+		return $this->db->set('date_modif', 'NOW()', false)
+				->where('id', $id)
+				->update($table);
+	}
 	
 	/**
 	 *	Supprime une news.
@@ -113,6 +131,90 @@ class Host_model extends CI_Model
         $insert_id = $this->db->insert_id();
         return $insert_id;
     }
+
+// chat ticket
+    	public function getbyid_ticket($table, $id){
+     //limit = 1;
+		// offset = 0;
+		$query = $this->db->get_where($table, array('id'=>$id) );
+		return $query->result();
+	} 
+
+		// select where
+
+	public function getbyid_element($table, $array_where){
+     //limit = 1;
+		// offset = 0;
+		$query = $this->db->get_where($table, $array_where);
+		return $query->result();
+	}
+
+
+	 public function edit($table,$data,$id)
+    {
+        $this->db->where('id', $id);
+        $this->db->update($table, $data);
+    }
+    
+    /**
+     * 
+     * @param type $table : the concerned table
+     * @param type $data  : set the new data , into an array 
+     * @param type $data_where :  specify the condition of edit 
+     * exemple $data_where = array("nom"=>"Léana")
+     */
+    public function updates($table,$data,$data_where)
+    {
+        $this->db->where($data_where);
+        $this->db->update($table, $data);
+    }
+    
+    /**
+     *  mise à jour 10/05/2018
+     *  @var field_order permet de definir l'attribut sur lequel une condition d'ordre existe
+     *  @var order permet de definir le type d'ordre 
+     * exemple get($table,'date_','ASC');  
+     */
+
+    public function get($table,$field_order = NULL,$order = NULL,$field_where = NULL)
+    {
+        // test s'il y'a une sur l'ordre
+        
+        if(($field_order != NULL)&&($order != NULL)){
+           $this->db->order_by($field_order, $order); 
+        }
+        
+        // test s'il y'a une condition sur Where 
+        
+        if($field_where != NULL){
+           $this->db->where($field_where);  
+        }
+      
+        $query = $this->db->get($table);
+        return $query->result();
+    }
+
+    public function getbyid($table,$id)
+    {
+        $limit = 1;
+        $offset = 0;
+        $query = $this->db->get_where($table, array('id' => $id), $limit, $offset);
+        return $query->row();
+    }
+    
+    /*
+     * j'appelle ce concept scène de ménage , ou guere des roles
+     * parfois faire des chose dans une incompletude est benefique pour la personne qui doit continuer avec
+     */
+    
+    public function getbyidinc($table,$id)
+    {
+        $limit = 1;
+        $offset = 0;
+        $query = $this->db->get_where($table, array('id' => $id), $limit, $offset);
+        return $query;
+    }
+
 }
 
 

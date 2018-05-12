@@ -272,4 +272,82 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
      $this->back->view('products/addon-list', array('liste'=> $data));
  }
 
+ // update statut hébergement
+   public function statut_host($id){
+   $data = $this->host_model->getbyid('produits_hebergements', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('produits_hebergements', $id, 0);
+   }else{
+     $this->host_model->update_statut('produits_hebergements', $id, 1);
+
+   };
+   $this->liste_hebergement();
+   }
+
+   // update statut domaine
+   public function statut_domaine($id){
+   $data = $this->host_model->getbyid('produits_domaines', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('produits_domaines', $id, 0);
+   }else{
+     $this->host_model->update_statut('produits_domaines', $id, 1);
+
+   };
+   $this->liste_domaines();
+   }
+ // update statut systeme d'exploitation
+   public function statut_systeme($id){
+   $data = $this->host_model->getbyid('systemes_exp', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('systemes_exp', $id, 0);
+   }else{
+     $this->host_model->update_statut('systemes_exp', $id, 1);
+
+   };
+   $this->liste_exploitation();
+   }
+
+   // update statut vps
+   public function statut_vps($id){
+   $data = $this->host_model->getbyid('produits_vps', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('produits_vps', $id, 0);
+   }else{
+     $this->host_model->update_statut('produits_vps', $id, 1);
+
+   };
+   $this->liste_vps();
+   }
+    // update statut vps
+   public function statut_addon($id){
+   $data = $this->host_model->getbyid('addons', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('addons', $id, 0);
+   }else{
+     $this->host_model->update_statut('addons', $id, 1);
+
+   };
+   $this->liste_addon();
+   }
+
 }

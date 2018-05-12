@@ -1,16 +1,15 @@
 
+
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-      
     <section class="content-header">
       <h1>
-       Liste des Domaines
+       Liste des Menus
         <small>MBOAHOST</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-        <li><a href="#">Liste des Domaines </a></li>
+        <li><a href="#">Liste des Menus </a></li>
         <li class="active">liste</li>
       </ol>
     </section>
@@ -22,24 +21,20 @@
         
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Liste des Domaines</h3>
+              <h3 class="box-title">Liste des Menus</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <a class="btn btn-app bg-olive" href="<?= base_url()?>hebergement_web_pour_developpeur/add_domain_view">
+              <a class="btn btn-app bg-olive" href="<?= base_url() ?>menus/menu_view">
                 <i class="fa fa-plus"></i> Ajouter
-              </a>
-              <a class="btn btn-app bg-olive" href="<?= base_url()?>hebergement_web_pour_developpeur/add_domain_api_view">
-                <i class="fa fa-plus"></i> Ajouter API
               </a>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Extensions</th>
-                  <th>Prix de Renouv</th>
-                  <th>Prix</th>
-                  <th>Prix de Transfert</th>
-                  <th>Frequence</th>
+                  <th>Titre</th>
+                  <th>Nom</th>
+                  <th>Lien</th>
+                  <th>Date de création</th>
                   <th>Actions</th>
                 </tr>
                 </thead>
@@ -47,12 +42,11 @@
                   <?php if ($liste != Null): $i = 0 ?>
                   <?php foreach ($liste as $agent => $value): ?>
                 <tr>
-                  <td><?php echo $liste[$i]->extension ;?></td>
-                  <td><?php echo $liste[$i]->prix_renouv ;?></td>
-                  <td><?php echo $liste[$i]->prix ;?></td>
-                  <td><?php echo $liste[$i]->prix_xfer ;?></td>
-                  <td><?php echo $liste[$i]->frequence ;?></td>
-                 <td>
+                  <td><?php echo $liste[$i]->titre ;?></td>
+                  <td><?php echo $liste[$i]->nom ;?></td>
+                  <td><?php echo $liste[$i]->url ;?></td>
+                  <td><?php echo $liste[$i]->created_at ;?></td>
+                  <td>
                     <div class="btn-group">
                       <div class="modal <?php if ($liste[$i]->statut == 0): ?>  modal-success<?php else: ?> modal-danger<?php endif; ?> fade" id="<?php echo $liste[$i]->id ;?>">
           <div class="modal-dialog">
@@ -60,15 +54,15 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><?php if ($liste[$i]->statut == 0): ?> Activer le nom de domaine<?php else: ?> Déactiver le nom de domaine<?php endif; ?></h4>
+                <h4 class="modal-title"><?php if ($liste[$i]->statut == 0): ?> Activer le menu<?php else: ?> Déactiver le menu<?php endif; ?></h4>
               </div>
                    <div class="modal-body">
-                    <p> Etes-vous sûre de vouloir <?php if ($liste[$i]->statut == 0): ?> Activer <?php else: ?> Déactiver <?php endif; ?> ce nom de domaine?</p>
+                    <p> Etes-vous sûre de vouloir <?php if ($liste[$i]->statut == 0): ?> Activer <?php else: ?> Déactiver <?php endif; ?> ce menu?</p>
                     </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fermer</button>
-              <a href="<?= base_url() ?>Hebergement_web_pour_developpeur/statut_domaine/<?php echo $liste[$i]->id ;?>">  <button type="submit" class="btn btn-outline"><?php if ($liste[$i]->statut == 0): ?> Activer le nom de domaine<?php else: ?> Déactiver le nom de domaine<?php endif; ?></button>
+              <a href="<?= base_url() ?>menus/statut/<?php echo $liste[$i]->id ;?>">  <button type="submit" class="btn btn-outline"><?php if ($liste[$i]->statut == 0): ?> Activer le menu<?php else: ?> Déactiver le menu<?php endif; ?></button>
               </a>
               </div>
             </div>
@@ -93,11 +87,10 @@
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Extensions</th>
-                  <th>Prix de Renouv</th>
-                  <th>Prix</th>
-                  <th>Prix de Transfert</th>
-                  <th>Frequence</th>
+                  <th>Titre</th>
+                  <th>Nom</th>
+                  <th>Lien</th>
+                  <th>Date de création</th>
                   <th>Actions</th>
                 </tr>
                 </tfoot>
