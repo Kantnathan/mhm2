@@ -4,7 +4,7 @@
     <section class="content-header">
       <h1>
        Liste des Catégorie
-        <small>AFOUP</small>
+        <small>MBOAHOST</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>

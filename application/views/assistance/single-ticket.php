@@ -103,13 +103,18 @@
                 <img src="<?= base_url()?>assets/dist/img/user4-128x128.jpg" alt="user image" class="online">
 
                 <p class="message">
+                  <?php $i = 0;
+               //echo json_encode($list)
+                   ?>
+                  <?php foreach ($liste as $key => $value) :?>
                   <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 2:15</small>
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo $liste[$i]['ticket']->created_at; ?></small>
                     Mike Doe
                   </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
+                   
+                  <?php echo $liste[$i]['ticket']->contenu; ?>
+                  <?php $i = $i+1;
+                endforeach; ?>
                 </p>
                 <div class="attachment">
                   <h4>Attachments:</h4>

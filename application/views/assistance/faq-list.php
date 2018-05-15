@@ -3,12 +3,12 @@
   <div class="content-wrapper">
     <section class="content-header">
       <h1>
-       Liste des Tickets
-        <small>Mboahost</small>
+       Liste des FAQ
+        <small>MBOAHOST</small>
       </h1>
       <ol class="breadcrumb">
         <li><a href="#"><i class="fa fa-dashboard"></i> Accueil</a></li>
-        <li><a href="#">Liste des Tickets </a></li>
+        <li><a href="#">Liste des FAQ </a></li>
         <li class="active">liste</li>
       </ol>
     </section>
@@ -20,19 +20,18 @@
         
           <div class="box">
             <div class="box-header">
-              <h3 class="box-title">Liste des Tickets</h3>
+              <h3 class="box-title">Liste des FAQ</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-              <a class="btn btn-app bg-olive" href="<?= base_url()?>assistance/ticket_view">
+              <a class="btn btn-app bg-olive" href="<?= base_url()?>assistance/faq_view">
                 <i class="fa fa-plus"></i> Ajouter
               </a>
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Objet</th>
-                  <th>Utilisateur</th>
-                  <th>Message</th>
+                  <th>Question</th>
+                  <th>Réponse</th>
                   <th>Date de création</th>
                   <th>Actions</th>
                 </tr>
@@ -41,11 +40,10 @@
                   <?php if ($liste != Null): $i = 0 ?>
                   <?php foreach ($liste as $agent => $value): ?>
                 <tr>
-                  <td><?php echo $liste[$i]->objet ;?></td>
-                  <td><?php echo $liste[$i]->id_user ;?></td>
-                  <td><?php echo $liste[$i]->contenu ;?></td>
+                  <td><?php echo $liste[$i]->question ;?></td>
+                  <td><?php echo $liste[$i]->reponse ;?></td>
                   <td><?php echo $liste[$i]->created_at ;?></td>
-                         <td>
+                  <td>
                     <div class="btn-group">
                       <div class="modal <?php if ($liste[$i]->statut == 0): ?>  modal-success<?php else: ?> modal-danger<?php endif; ?> fade" id="<?php echo $liste[$i]->id ;?>">
           <div class="modal-dialog">
@@ -53,15 +51,15 @@
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title"><?php if ($liste[$i]->statut == 0): ?> Activer le ticket<?php else: ?> Déactiver le ticket<?php endif; ?></h4>
+                <h4 class="modal-title"><?php if ($liste[$i]->statut == 0): ?> Activer la FAQ<?php else: ?> Déactiver la FAQ<?php endif; ?></h4>
               </div>
                    <div class="modal-body">
-                    <p> Etes-vous sûre de vouloir <?php if ($liste[$i]->statut == 0): ?> Activer <?php else: ?> Déactiver <?php endif; ?> ce ticket?</p>
+                    <p> Etes-vous sûre de vouloir <?php if ($liste[$i]->statut == 0): ?> Activer <?php else: ?> Déactiver <?php endif; ?>cette FAQ?</p>
                     </div>
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline pull-left" data-dismiss="modal">Fermer</button>
-              <a href="<?= base_url() ?>assistance/statut_ticket/<?php echo $liste[$i]->id ;?>">  <button type="submit" class="btn btn-outline"><?php if ($liste[$i]->statut == 0): ?> Activer le ticket<?php else: ?> Déactiver le ticket<?php endif; ?></button>
+              <a href="<?= base_url() ?>assistance/statut_faq/<?php echo $liste[$i]->id ;?>">  <button type="submit" class="btn btn-outline"><?php if ($liste[$i]->statut == 0): ?> Activer la FAQ<?php else: ?> Déactiver la FAQ<?php endif; ?></button>
               </a>
               </div>
             </div>
@@ -71,7 +69,7 @@
         </div>
                   <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash-o" style="margin-right: 7px;"></i></button>
                   <button type="button" class="btn btn-default btn-sm "><i class="fa fa-edit" style="margin-right: 7px;"></i></button>
-                 <a href="<?= base_url() ?>assistance/single_ticket/<?php echo $liste[$i]->id ;?>"><button type="button" class="btn btn-default btn-sm "><i class="fa fa-eye" style="margin-right: 7px;"></i></button></a> 
+                  <button type="button" class="btn btn-default btn-sm "><i class="fa fa-eye" style="margin-right: 7px;"></i></button>
                   <?php if ($liste[$i]->statut == 0): ?>
                   <button type="button" class="btn btn-success btn-sm "  data-toggle="modal" data-target="#<?php echo $liste[$i]->id ;?>" > <i class="fa  fa-check-square" style="margin-right: 7px;"></i></button>
                 <?php else: ?>

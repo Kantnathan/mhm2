@@ -57,8 +57,7 @@
                           </div>
                           <!-- /.box-header -->
                           <div class="box-body pad">
-                                  <textarea id="editor1" rows="10" cols="80" name="contenu">
-                                                         Saisissez le message  ici
+                                  <textarea id="edtor1" rows="10" cols="80" name="contenu" style="width: 100%" placeholder=" Entrez votre Message ici">
                                   </textarea>
                   <?php echo form_error("contenu");?>
 

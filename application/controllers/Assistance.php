@@ -107,8 +107,8 @@ public function ticket_view(){
              );
 			$mess = $this->host_model->set('message', $message);
 
-     	//$this->ticket_view();
-          var_dump($data);
+     	$this->ticket_list();
+          //var_dump($data);
 		}
 		else{
      	$this->ticket_view();
@@ -143,8 +143,8 @@ public function single_ticket($id){
     };
     $liste = array('list'=>$data);
     $yes =  json_encode($liste);
-    var_dump($liste);
-   	//$this->back->view('assistance/single-ticket');
+   // var_dump($liste);
+   	$this->back->view('assistance/single-ticket', array('liste'=> $data));
    }
 
       // update statut temoignage
@@ -177,6 +177,21 @@ public function single_ticket($id){
 
    };
    $this->ticket_list();
+   }
+      // update statut ticket
+   public function statut_faq($id){
+   $data = $this->host_model->getbyid('faq', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('faq', $id, 0);
+   }else{
+     $this->host_model->update_statut('faq', $id, 1);
+
+   };
+   $this->faq_list();
    }
    // edit ticket
 
@@ -235,4 +250,55 @@ public function single_ticket($id){
    }
 
 }
+
+  // view faq
+public function faq_view(){
+  if (!$this->ion_auth->logged_in())
+        {
+            // redirect them to the login page
+            $this->layout->view('auth/login', 'refresh');
+        }
+        else if ($this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
+        {
+            // redirect them to the home page because they must be an administrator to view this
+        $this->back->view('assistance/add-faq');
+        //$this->back->view('back/administrator');
+            
+        }
+      }
+
+       // ajout faq
+   public function ajout_faq(){
+    $this->form_validation->set_rules('question', '"Question de la FAQ"' ,'required');
+    $this->form_validation->set_rules('reponse', '"Reponse  de la FAQ"', 'required');
+    if ($this->form_validation->run() === TRUE)
+    {
+
+      $data = array(
+        'question' => $this->input->post('question'),
+        'reponse' => $this->input->post('reponse'),
+        'categorie' => $this->input->post('categorie'),
+        'statut' => $this->input->post('statut'),
+        'created_at'=>date("Y-m-d H:i:s"),
+      );
+      $this->host_model->set('faq', $data);
+      $this->faq_list();
+
+    }
+    else{
+      $this->faq_view();
+    //$this->back->view('blog/add-categorie');
+
+    }
+   
+   }
+
+       // liste des faq
+   public function faq_list(){
+
+   $data = $this->host_model->get_all('faq');
+    //$cat = $this->host_model->get_all('categorie');
+
+    $this->back->view('assistance/faq-list', array('liste'=>$data));
+   }
 }

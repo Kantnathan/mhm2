@@ -398,12 +398,13 @@
             <i class="fa fa-wrench"></i>
             <span>Assistance</span>
             <span class="pull-right-container">
-              <span class="label label-primary pull-right">2</span>
+              <span class="label label-info pull-right">3</span>
             </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?= base_url() ?>assistance/ticket_list"><i class="fa fa-envelope text-yellow"></i> Ouvrir un ticket</a></li>
             <li><a href="<?= base_url() ?>assistance/temoignage_list"><i class="fa fa-quote-left text-success"></i> Témoignages</a></li>
+            <li><a href="<?= base_url() ?>assistance/faq_list"><i class="fa fa-question-circle text-warning"></i> FAQ</a></li>
           </ul>
         </li>
         <li class="treeview">
