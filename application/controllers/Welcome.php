@@ -22,4 +22,27 @@ class Welcome extends CI_Controller {
 	{
 		$this->load->view('welcome_message');
 	}
+
+
+	public function uniqid(){
+		$id = uniqid();
+		var_dump($id);
+		//var_dump(random_int(100, 999));
+        //var_dump(random_int(-1000, 0));
+        $ran = random_int(1, 1888);
+        var_dump($ran);
+	}
+
+	function random_str($nbr) {
+    $str = "MH";
+    $chaine = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSUTVWXYZ0123456789";
+    $nb_chars = strlen($chaine);
+
+    for($i=0; $i<$nbr; $i++)
+    {
+        $str .= $chaine[ rand(0, ($nb_chars-1)) ];
+    }
+    var_dump($str);
+    return $str;
+}
 }

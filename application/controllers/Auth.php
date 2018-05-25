@@ -48,6 +48,24 @@ class Auth extends CI_Controller
 			$this->back->view('back/administrator', $this->data);
 		}
 	}
+	/**
+	 * Générateur de code
+	 *
+	 * @param nbr         nombre de caractere que va contenir le code en dehors des valeurs initiale MH 
+	 * @param string|bool 
+	 */
+   	function random_str($nbr) {
+    $str = "MH";
+    $chaine = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSUTVWXYZ0123456789";
+    $nb_chars = strlen($chaine);
+
+    for($i=0; $i<$nbr; $i++)
+    {
+        $str .= $chaine[ rand(0, ($nb_chars-1)) ];
+    }
+    //var_dump($str);
+    return $str;
+}
 
 	/**
 	 * Log the user in
@@ -355,6 +373,9 @@ class Auth extends CI_Controller
 			redirect("auth/forgot_password", 'refresh');
 		}
 	}
+    
+
+
 
 	/**
 	 * Activate the user
@@ -440,7 +461,7 @@ class Auth extends CI_Controller
 	/**
 	 * Create a new user
 	 */
-	public function create_user(){
+	public function create_user($code_parent = 0){
 
 	$this->form_validation->set_rules('first_name', $this->lang->line('create_user_fname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
 	$this->form_validation->set_rules('last_name', $this->lang->line('create_user_lname_label'), 'trim|required|max_length[52]|alpha_dash|encode_php_tags');
@@ -467,6 +488,8 @@ class Auth extends CI_Controller
 					'country'    => $this->input->post('country'),
 					'state'      => $this->input->post('state'),
 					'postcode'   => $this->input->post('postcode'),
+					'code'       =>  $this->random_str(3),
+					'code_parent'=>  $this->input->post('code_parent'),
 					'address'    => $this->input->post('address'),
 				);
 		$data = array(
@@ -489,9 +512,10 @@ class Auth extends CI_Controller
 	else{
 		//echo "oufffps";
 		$this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-		$this->layout->view('auth/create_account', 'refresh');
+
+		$this->layout->view('auth/create_account', array('code_parent'=> $code_parent),'refresh');
 		}
-	$this->layout->view('auth/create_account');
+	$this->layout->view('auth/create_account', array('code_parent'=> $code_parent));
 	}
 	
 

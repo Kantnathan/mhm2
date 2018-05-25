@@ -301,4 +301,50 @@ public function faq_view(){
 
     $this->back->view('assistance/faq-list', array('liste'=>$data));
    }
+   // Delete  faq
+   public function delete_faq($id){
+   $result = $this->host_model->delete($id, 'faq');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('faqMessage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->faq_list();
+   }
+
+     // Delete  ticket
+   public function delete_ticket($id){
+   $result = $this->host_model->delete($id, 'ticket');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('ticketMessage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->ticket_list();
+   }
+
+       // Delete  ticket
+   public function delete_temoignage($id){
+   $result = $this->host_model->delete($id, 'temoignages');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('testiMessage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->temoignage_list();
+   }
+
+   // affiliate
+   public function affiliate(){
+    $data_where = array('code_parent'=>$this->ion_auth->user()->row()->code);
+    $data = $this->host_model->getbyid_element('users', $data_where);
+    //var_dump($data);
+    $this->back->view('assistance/affiliate', array('liste'=> $data));
+   }
 }

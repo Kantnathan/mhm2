@@ -91,10 +91,10 @@ class Host_model extends CI_Model
 	 *	@param integer $id	L'id de la news à modifier
 	 *	@return bool		Le résultat de la requête
 	 */
-	public function supprimer_news($id)
+	public function delete($id, $table)
 	{
-		return $this->db->where('id', (int) $id)
-				->delete($this->table);
+		return $this->db->where('id', $id)
+				->delete($table);
 	}
 	
 	/**
@@ -103,10 +103,9 @@ class Host_model extends CI_Model
 	 *	@param array $where	Tableau associatif permettant de définir des conditions
 	 *	@return integer		Le nombre de news satisfaisant la condition
 	 */
-	public function count($where = array())
+	public function count($table)
 	{
-		return (int) $this->db->where($where)
-				      ->count_all_results($this->table);
+		return (int) $this->db->count_all_results($table);
 	}
 	
 	/**

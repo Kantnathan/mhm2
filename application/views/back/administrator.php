@@ -21,9 +21,9 @@
           <!-- small box -->
           <div class="small-box bg-aqua">
             <div class="inner">
-              <h3>15</h3>
+              <h3><?php echo $this->host_model->count('users') ;?></h3>
 
-              <p>Agent(s) on call</p>
+              <p>Utilisateurs</p>
             </div>
             <div class="icon">
               <i class="ion ion-bag"></i>

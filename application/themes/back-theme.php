@@ -46,7 +46,7 @@
 <div class="wrapper">
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a href="<?= base_url() ?>" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>Mboahost</b></span>
       <!-- logo for regular state and mobile devices -->
@@ -338,7 +338,7 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MENU DE NAVIGATION</li>
-        <li><a href="https://adminlte.io/docs"><i class="fa fa-home"></i> <span>Accueil</span></a></li>
+        <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/admin"><i class="fa fa-home"></i> <span>Accueil</span></a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa fa-dashboard"></i>
@@ -348,7 +348,7 @@
             </span>
           </a>
           <ul class="treeview-menu">
-            
+            <li><a href="<?= base_url() ?>assistance/affiliate"><i class="fa fa-gift text-warning"></i> Affiliation</a></li>
             <li><a href="#"><i class="fa fa-comment"></i> Gestion des Utilisateurs</a></li>
           </ul>
         </li>

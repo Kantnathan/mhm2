@@ -76,4 +76,16 @@ class Menus extends CI_Controller {
    };
    $this->menus_list();
    }
+   // Delete  menu
+   public function delete_menu($id){
+   $result = $this->host_model->delete($id, 'menus');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('menuMessage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->menus_list();
+   }
 }

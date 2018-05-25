@@ -104,7 +104,6 @@
 
                 <p class="message">
                   <?php $i = 0;
-               //echo json_encode($list)
                    ?>
                   <?php foreach ($liste as $key => $value) :?>
                   <a href="#" class="name">

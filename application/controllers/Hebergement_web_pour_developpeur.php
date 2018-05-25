@@ -89,8 +89,9 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
      
      $result = $this->host_model->get_all('frequences');
      $apiresult = $this->host_model->get_all('api_domaines');
+     $this->liste_domaines();
     
- 	$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
+ 	//$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
 
      
  }
@@ -138,7 +139,7 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
          'stockage_email'=> $this->input->post('st_email'),
          'pieces_jointes'  => $this->input->post('pjointes'),
          'comptes_ftp'  => $this->input->post('ftp'),
-         'bases-donnees'  => $this->input->post('bd'),
+         'bases_donnees'  => $this->input->post('bd'),
  	);
  	$query = $this->host_model->set('produits_hebergements', $data);
      	//var_dump($query);
@@ -350,4 +351,135 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
    $this->liste_addon();
    }
 
+      // Delete domaine
+   public function delete_domaine($id){
+   $result = $this->host_model->delete($id, 'produits_domaines');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->liste_domaines();
+   }
+        // Delete
+   public function delete_host($id){
+   $result = $this->host_model->delete($id, 'produits_hebergements');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->liste_hebergement();
+   }
+        // Delete vps
+   public function delete_vps($id){
+   $result = $this->host_model->delete($id, 'produits_vps');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->liste_vps();
+   }
+        // Delete  systeme
+   public function delete_systeme($id){
+   $result = $this->host_model->delete($id, 'systemes_exp');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->liste_exploitation();
+   }
+
+// Delete  addon
+   public function delete_addon($id){
+   $result = $this->host_model->delete($id, 'addons');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->liste_addon();
+   }
+
+ // single domaine
+   public function single_domaine($id){
+  //$id = $this->input->get('id');
+        $data = $this->host_model->getbyid_ticket('produits_domaines',$id);
+   //var_dump($result);
+    $this->back->view('products/single-domaine', array('liste'=> $data));
+   }
+
+ // single host
+   public function single_host($id){
+  //$id = $this->input->get('id');
+        $data = $this->host_model->getbyid_ticket('produits_hebergements',$id);
+   //var_dump($result);
+    $this->back->view('products/single-host', array('liste'=> $data));
+   }
+   // single vps
+   public function single_vps($id){
+  //$id = $this->input->get('id');
+        $data = $this->host_model->getbyid_ticket('produits_vps',$id);
+   //var_dump($result);
+    $this->back->view('products/single-vps', array('liste'=> $data));
+   }
+
+     // single systeme
+   public function single_systeme($id){
+  //$id = $this->input->get('id');
+        $data = $this->host_model->getbyid_ticket('systemes_exp',$id);
+   //var_dump($result);
+    $this->back->view('products/single-systeme', array('liste'=> $data));
+   }
+
+   // single addon
+   public function single_addon($id){
+  //$id = $this->input->get('id');
+        $data = $this->host_model->getbyid_ticket('addons',$id);
+   //var_dump($result);
+    $this->back->view('products/single-addon', array('liste'=> $data));
+    }
+   // edit products
+
+   public function edit_domaine($id){
+   $data = $this->host_model->getbyid_ticket('produits_domaines', $id);
+   $result = $this->host_model->get_all('frequences');
+   $apiresult = $this->host_model->get_all('api_domaines');
+  $this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult,'single' => $data));
+ }
+   // update domain name
+ public function update_domain(){
+  // recuperation des données
+  $id = $this->input->post('id');
+  $data = array(
+         'extension'  => $this->input->post('extension'),
+         'prix'       => $this->input->post('prix'),
+         'prix_renouv'=> $this->input->post('prix_renouv'),
+         'prix_xfer'  => $this->input->post('prix_transfert'),
+         'frequence'  => $this->input->post('frequence'),
+         'description'=> $this->input->post('desc'),
+  );
+  $query = $this->host_model->edit('produits_domaines', $data, $id);
+      //var_dump($query);
+     
+     $result = $this->host_model->get_all('frequences');
+     $apiresult = $this->host_model->get_all('api_domaines');
+     $this->liste_domaines();
+    
+  //$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
+
+     
+ }
 }

@@ -14,11 +14,14 @@
                                 </div>
                                 <?php } ?>
                                 <h2 class="title text-center"><?php echo lang('create_user_heading');?></h2>
-                               <form method="post" action="<?= base_url()?>auth/create_user">
+                               <form method="post" action="<?= base_url()?>auth/create_user/<?php echo $code_parent ;?>">
                                     <div class="col-sm-6">
-                                    
+                                        <?php echo $code_parent ;?>
                                     <label class="control-label"><?php echo lang('create_user_lname_label');?></label>
                                     <input type="text" value="<?php echo $this->input->post('last_name'); ?>" name="last_name" size="50" placeholder="<?php echo lang('create_user_placeholder_label');?> <?php echo lang('create_user_lname_label');?>" />
+
+                                    <!-- recupération du code parent -->
+                                    <input type="hidden" value="<?php echo $code_parent ;?>" name="code_parent"/>
                                     
                                     <label class="control-label"><?php echo lang('create_user_fname_label');?></label>
                                     <input type="text" value="<?php echo $this->input->post('first_name'); ?>" name="first_name" size="50" placeholder="<?php echo lang('create_user_placeholder_label');?> <?php echo lang('create_user_fname_label');?>" />

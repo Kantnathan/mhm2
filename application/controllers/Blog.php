@@ -119,4 +119,24 @@ class Blog extends CI_Controller {
    };
    $this->article_list();
    }
+   // Delete  addon
+   public function delete_categorie($id){
+   $result = $this->host_model->delete($id, 'categorie');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+  
+   $this->cat_list();
+   }
+   // Delete  addon
+   public function delete_article($id){
+   $result = $this->host_model->delete($id, 'articles');
+   $statusMsg = $result?'Suppression éffectuée avec succès.':'Une erreur s\'est produite lors de la supression' ;
+   $this->session->set_flashdata('deleteMessaage',$statusMsg);
+   //var_dump($dat);
+  // $statut = $data->statut;
+//   echo $statut;
+
+  
+   $this->article_list();
+   }
 }
