@@ -26,6 +26,27 @@ class Host_model extends CI_Model
 		$query = $this->db->get($table);
 		return $query->result();
 	}
+
+	public function get_distinct($distinct, $table){
+		$this->db->distinct($distinct);
+		$this->db->select($distinct);
+		$query = $this->db->get($table);
+		return $query->result();
+	}
+
+	public function get_where($tab, $where){
+		$query = $this->db->where($where)
+					  ->get($tab);
+		return $query->result();
+	}
+
+	public function get_sum($column, $table, $where){
+		$this->db->select_sum($column);
+		$this->db->where($where);
+		$query = $this->db->get($table);
+		return $query->result();
+	}
+
 	public function ajouter_news($auteur, $titre, $contenu)
 	{
 		return $this->db->set('auteur',	$auteur)
@@ -67,16 +88,7 @@ class Host_model extends CI_Model
 				->update($this->table);
 	}
 
-
-		/**
-	 *	Édite un statut existant.
-	 *	
-	 *	@param integer $id	L'id de l'element'
-	 *	@param auteur: herve elegue
-	 *	@param date:11/05/2018
-	 *	@return bool		Le résultat de la requête
-	 */
-	public function update_statut($table, $id, $statut)
+		public function update_statut($table, $id, $statut)
 	{
 			$this->db->set('statut', $statut);
 		
@@ -103,12 +115,41 @@ class Host_model extends CI_Model
 	 *	@param array $where	Tableau associatif permettant de définir des conditions
 	 *	@return integer		Le nombre de news satisfaisant la condition
 	 */
-	public function count($table)
+	public function count($where,$tab=null)
 	{
-		return (int) $this->db->count_all_results($table);
+		if(is_array($where)){
+			return (int) $this->db->where($where)
+				      ->count_all_results($tab);
+		}else{
+			return (int) $this->db->count_all_results($where);
+		}
 	}
 	
 	/**
+	 *	Supprime une news.
+	 *	
+	 *	@param integer $id	L'id de la news à modifier
+	 *	@return bool		Le résultat de la requête
+	 */
+	public function supprimer($where,$tab)
+	{
+		return $this->db->where($where)
+				->delete($tab);
+	}
+	
+	/**
+	 *	Retourne le nombre de news.
+	 *	
+	 *	@param array $where	Tableau associatif permettant de définir des conditions
+	 *	@return integer		Le nombre de news satisfaisant la condition
+	 *
+	*public function count($where = array(), $tab = null)
+	*{
+	*	return (int) $this->db->where($where)
+	*			      ->count_all_results($tab);
+	*}
+	
+	**
 	 *	Retourne une liste de $nb dernière news.
 	 *	
 	 *	@param integer $nb	Le nombre de news
@@ -129,9 +170,9 @@ class Host_model extends CI_Model
         $this->db->insert($table, $data);
         $insert_id = $this->db->insert_id();
         return $insert_id;
-    }
-
-// chat ticket
+	}
+	
+	// chat ticket
     	public function getbyid_ticket($table, $id){
      //limit = 1;
 		// offset = 0;
@@ -213,7 +254,6 @@ class Host_model extends CI_Model
         $query = $this->db->get_where($table, array('id' => $id), $limit, $offset);
         return $query;
     }
-
 }
 
 

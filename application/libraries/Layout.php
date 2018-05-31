@@ -16,6 +16,9 @@ class Layout
 	$this->CI =& get_instance();
 	
 	$this->var['output'] = '';
+
+	$this->CI->load->model(array('host_model'));
+	$this->CI->load->library(array('ion_auth'));
 	
 	//	Le titre est composé du nom de la méthode et du nom du contrôleur
 	//	La fonction ucfirst permet d'ajouter une majuscule
@@ -37,9 +40,15 @@ class Layout
 |===============================================================================
 */
 	
-	public function view($name, $data = array())
+	public function view($name, $data = array(), $dataTheme = array())
 	{
+		if ($this->CI->ion_auth->logged_in()){
+			$this->var['logged_user'] = ' ';
+		}
 		$this->var['output'] .= $this->CI->load->view($name, $data, true);
+		if(isset($dataTheme['vpss'])){$this->var['vpss']=$dataTheme['vpss'];}
+		$pan = $this->get_panier2();
+		$this->var['panier'] = $pan;
 		
 		$this->CI->load->view('../themes/default', $this->var);
 	}
@@ -48,6 +57,61 @@ class Layout
 	{
 		$this->var['output'] .= $this->CI->load->view($name, $data, true);
 		return $this;
+	}
+
+	public function get_panier2() {
+		$i=0;
+		$cookieName = 'visiteur';
+		$idVis = null;
+		if(isset($_COOKIE[$cookieName])){
+			$idVis = $_COOKIE[$cookieName];
+		}else{return 0;}
+		$comDomaines = $this->CI->host_model->get_where('panier', array('id_vis'=>$idVis));
+
+		$nombProd = 0;
+		$prixTot = 0;
+		$content = ' ';
+		foreach($comDomaines as $domaine) {
+			$nombProd++;
+			$prixTot += $domaine->prix;
+			$prix = $domaine->prix;
+			$duree = $domaine->duree;
+			$type = $domaine->autre;
+			if($domaine->type_produit == 'domaine'){
+				if($type=='busy'){$dom = 'Transfert: '.$domaine->nom;}
+				else{$dom = 'Domaine: '.$domaine->nom;}
+				$content .= '<tr>
+								<td>'.$dom.'</td>
+								<td>'.$prix.'<sup>F<sup></td>
+								<td><i class="fa fa-trash-o" onclick="retirerDomaine2(\''.$domaine->nom.'\')"></i></td>
+							</tr>';
+			}else if($domaine->type_produit == 'hebergement'){
+				
+				$content .= '<tr>
+								<td>Hébergement: '.$domaine->nom.'</td>
+								<td>'.$prix.'<sup>F<sup></td>
+								<td><i class="fa fa-trash-o" onclick="retirerHebergement(\''.$domaine->id_produit.'\')"></i></td>
+							</tr>';
+			}else{
+				$content .= '<tr>
+								<td>VPS: '.$domaine->nom.'</td>
+								<td>'.$prix.'<sup>F<sup></td>
+								<td><i class="fa fa-trash-o" onclick="retirerVps(\''.$domaine->id_produit.'\')"></i></td>
+							</tr>';
+			}
+		}
+		if($prixTot ==0){$add = 'disabled="disabled"';}else{$add='';}
+		$head = '<h3 class="badge"><span style="font-size: 26px; color:#fff;">Ton Panier <small class="text-white">('.$nombProd.' Produits)</small></span></h3>
+                        <table id="cart-up" class="responsive tablesaw-stack text-white" data-tablesaw-mode="stack"><input type="hidden" value="'.$nombProd.'" id="nombprod">
+							<tbody>';
+		$foot = '</tbody>
+                        </table>
+                        <h3 class="margin-top-30 text-white"><small class="text-white">TOTAL:</small><span style="font-size: 26px;" class="pull-right">'.$prixTot.' <sup>FCFA</sup></span></h3>
+						<a href="'.base_url().'nom_de_domaine/commande" class="btn btn-success margin-top-20 minwi" '.$add.'>Je confirme la commande</a>';
+		$return['html'] = $head.$content.$foot;
+		$return['data'] = $comDomaines;
+		$return['numb'] = $nombProd;
+		return $return;
 	}
 	/*
 |===============================================================================

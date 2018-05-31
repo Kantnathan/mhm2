@@ -2,36 +2,35 @@
     <section class="breadcrumbs">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Single Year Domain Price</h1>
+                <h1>Multi Year Domain Price</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb">
                     <li>You are here: </li>
                     <li><a href="index.html">Home</a>
                     </li>
-                    <li class="active">Single Year Domain Price</li>
+                    <li class="active">Multi Year Domain Price</li>
                 </ol>
             </div>
         </div>
     </section>
-    <!-- End of Breadcrumps -->
-
-    <!--  Domain Search -->
+<!-- End of Breadcrumps -->
     <div class="domains bg_dark">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title">Find a personal domain that stands out</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-            </div>
-        </div>
+    	<div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h2 class="title">Find a personal domain that stands out</h2>
+					 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+				</div>
+			</div>
 
-        <div class="row">
-            <div class="col-sm-10 com-md-8 center-block">
-                <form class="form-inline domainsearch clearfix"  method="post" action="#">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
-                            <span class="selection">
-                            <select name="tld" class="e1">
+			<div class="row ">
+				<div class="col-sm-10 com-md-8 center-block ">
+					<form class="form-inline domainsearch clearfix"  method="post" action="#">
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
+							<span class="selection">
+								<select name="tld" class="e1">
                                 <?php if ($domaines != NULL): $i = 0?>
                                   <?php  foreach ($domaines as $key => $value ): ?>
                                     <option value="<?php echo $value->extension ;?>"><?php echo $value->extension ;?></option>
@@ -39,144 +38,75 @@
                                   <?php endforeach ;?>
                                 <?php endif ;?>
                              </select>
-                            </span>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn waves-effect waves-light btn-success" style="width:100%">Search</button>
-                        </div>
-                </form>
-                <?php $commonExt = array('.com', '.net', '.biz', '.org', '.info'); ?>
-                <div class="domainextensions clearfix">
-                    <ul class="hotdomains list-inline clearfix">
-                        <?php $i=0; if($domaines != null){ 
-                                foreach($domaines as $domaine) { if ($i<10){?>
-                                    <?php if(!in_array($domaine->extension, $commonExt) && $domaine->extension != '.cm') { ?><li class="new"><?php }else if($domaine->extension == '.cm'){?><li class="hot"><?php }else{?><li><?php } ?>
-                                        <div class="item"><div class="extension"><?php echo $domaine->extension; ?> <span class="price"><?php echo number_format($domaine->prix,0,0,','); ?> FCFA/An</span> <span class="oldprice">$ 20</span></div></div></li>
-                        <?php $i++;}}} ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
+							</span>
+						</div>
+						<div class="col-sm-2">
+							<button type="submit" class="btn waves-effect waves-light btn-info">Enregistrer</button>
+						</div>
+					</form>
+				</div>
+				<div class="center-block text-center">
+				 <a href="<?php echo base_url(); ?>nom_de_domaine" type="submit" class="btn waves-effect waves-light btn-success margin-top-20">Prix des Extensions</a>
+				</div>
+			</div>
+		</div>
     </div>
-    <!-- End of Domain Search -->
-
-	<!-- Domains -->
-    <div class="domainfeatures section_space">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title"> Choose your domain at affordable price</h2>
-                <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy. </p>
-            </div>
-        </div>
-
-        <div class="domains-table margin-top-40">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="tld-table" class="tablesorter responsive tablesaw-stack" data-tablesaw-mode="stack">
-                        <thead>
-                            <tr>
-                                <th>Extension</th>
-                                <th>Description</th>
-                                <th>Prix enregistrement</th>
-                                <th>Prix renouvellement</th>
-                                <th>Prix transfert</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if($domaines != null){ 
-                                foreach($domaines as $domaine) {?>
-                                    <tr>
-                                <td><?php echo $domaine->extension; if ($domaine->extension == '.cm'){ ?><span class="hot label label-danger">Deal</span><?php } ?>
-                                <?php if(!in_array($domaine->extension, $commonExt) && $domaine->extension != '.cm') { ?><span class="newoffer label label-success">Nouveau</span><?php } ?></td>
-                                        <td><?php echo $domaine->description; ?></td>
-                                        <td><?php echo number_format($domaine->prix,0,0,','); ?> FCFA</td>
-                                        <td><?php echo number_format($domaine->prix_renouv,0,0,','); ?> FCFA</td>
-                                        <td><?php echo number_format($domaine->prix_xfer,0,0,','); ?> FCFA</td>
-                                    </tr>
-                                <?php }} ?>
-                        </tbody>
-                    </table>
-                    <div class="col-lg-4 center-block spacing-20 text-center">
-        <a href="multi-year-pricing.html" class="btn waves-effect waves-light btn-info btn-lg margin-top-40"> Check Various Domain Pricing</a></div>
-                </div>
-            </div>
-        </div>
+    <section class="blogpost-home bg_gray section_space">
+	 <div class="row">
+		<div class="col-sm-12">
+		   <div class="text-center">
+			  <h2 class="title">Comment enregistrer votre nom de domaine</h2>
+			  <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</p>
+		   </div>
+		   <div class="col-sm-4 margin-top-40">
+			  <div class="home-blog-posts">
+				 <div class="home-blog-image">
+					<a href="#">
+					<img src="<?= base_url()?>assets/images/blog/blog1.jpg" alt="">
+					</a>
+				 </div>
+				 <div class="post-info">
+				 	 <h3><a href="#">Avoid hacking of servers with Theft Protection</a></h3>
+					 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				 </div>
+			  </div>
+		   </div>
+		   <div class="col-sm-4 margin-top-40">
+			  <div class="home-blog-posts">
+				 <div class="home-blog-image">
+					<a href="#">
+					<img src="<?= base_url()?>assets/images/blog/blog2.jpg" alt="">
+					</a>
+				 </div>
+				 <div class="post-info">
+				 	<h3><a href="#">Customize templates using wide array of options from Server Settings</a></h3>
+				 	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				 </div>
+			  </div>
+		   </div>
+		   <div class="col-sm-4 margin-top-40">
+			  <div class="home-blog-posts">
+				 <div class="home-blog-image">
+					<a href="#">
+					<img src="<?= base_url()?>assets/images/blog/blog3.jpg" alt="">
+					</a>
+				 </div>
+				 <div class="post-info">
+					 <h3><a href="#">Secure your applications with robust infrastructure.</a></h3>
+				 	<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.</p>
+				 </div>
+			  </div>
+		   </div>
+		</div>
+     </div>
+     <div class="row">
+		   <div class="text-center margin-top-20">
+			  <span style="font-size: 30px">Vous avez deja un nom de domaine? <a href="#" class="btn waves-effect waves-light btn-warning btn-lg ">TRANFEREZ VOTRE DOMAINE</a></span>
+           </div>
     </div>
-    <!-- End of Domains -->
+  </section>
 
-	<!-- Features -->
-    <div class=" bg_gray section_space">
-    	<div class="domainfeatures">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="title"> Choose a localized / global domain that fits your business the best</h2>
-                    <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry. </p>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Most Popular</h3>
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Domain Deals</h3>
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
-
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Individual Names</h3>
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                     <div class="domainchoose">
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                     <div class="domainchoose">
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
-                </div>
-        </div>
-    </div>
-    <!-- End of Features -->
-
-    <!-- Hosting Services -->
+  <!-- Hosting Services -->
   <section class="features section_space">
 
      <div class="row">
@@ -307,13 +237,11 @@
               <h3><b>Reseller</b> Hosting</h3>
            </div>
         </div>
-
      </div>
   </section>
   <!-- End of Hosting Services -->
 
-    <!-- FAQ -->
-    <div class="faq bg_gray section_space">
+  <div class="faq bg_gray section_space">
           <div class="row">
              <div class="col-sm-12  text-center">
                 <h2 class="title">Some of the frequently asked questions  <b>(FAQ's)</b></h2>
@@ -410,9 +338,8 @@
              </div>
           </div>
      </div>
-     <!-- End of FAQ -->
 
-	<!-- Contact -->
+     <!-- Contact -->
 	<div class="row section_space coloumgrid">
             <div class="col-sm-12 text-center multipannels">
 

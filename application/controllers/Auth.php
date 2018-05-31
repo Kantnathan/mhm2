@@ -48,24 +48,25 @@ class Auth extends CI_Controller
 			$this->back->view('back/administrator', $this->data);
 		}
 	}
-	/**
+
+		/**
 	 * Générateur de code
 	 *
 	 * @param nbr         nombre de caractere que va contenir le code en dehors des valeurs initiale MH 
 	 * @param string|bool 
 	 */
    	function random_str($nbr) {
-    $str = "MH";
-    $chaine = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSUTVWXYZ0123456789";
-    $nb_chars = strlen($chaine);
+		$str = "MH";
+		$chaine = "abcdefghijklmnpqrstuvwxyABCDEFGHIJKLMNOPQRSUTVWXYZ0123456789";
+		$nb_chars = strlen($chaine);
 
-    for($i=0; $i<$nbr; $i++)
-    {
-        $str .= $chaine[ rand(0, ($nb_chars-1)) ];
-    }
-    //var_dump($str);
-    return $str;
-}
+		for($i=0; $i<$nbr; $i++)
+		{
+			$str .= $chaine[ rand(0, ($nb_chars-1)) ];
+		}
+		//var_dump($str);
+		return $str;
+	}
 
 	/**
 	 * Log the user in
@@ -88,8 +89,12 @@ class Auth extends CI_Controller
 			{
 				//if the login is successful
 				//redirect them back to the home page
-				$this->session->set_flashdata('message', $this->ion_auth->messages());
-				redirect(site_url().'/hebergement_web_pour_developpeur/admin', 'refresh');
+				if($this->get_panier() > 0){
+					redirect(site_url().'hebergement_web/paiement', 'refresh');
+				}else{
+					$this->session->set_flashdata('message', $this->ion_auth->messages());
+					redirect(site_url().'hebergement_web_pour_developpeur/admin', 'refresh');
+				}
 				//var_dump(site_url());
 			}
 			else
@@ -120,6 +125,17 @@ class Auth extends CI_Controller
 		}
 	}
 
+	public function get_panier() {
+		$i=0;
+		$cookieName = 'visiteur';
+		$idVis = null;
+		if(isset($_COOKIE[$cookieName])){
+			$idVis = $_COOKIE[$cookieName];
+		}
+		$comDomaines = $this->host_model->get_where('panier', array('id_vis'=>$idVis));
+		return count($comDomaines);
+	}
+
 	/**
 	 * Log the user out
 	 */
@@ -132,7 +148,7 @@ class Auth extends CI_Controller
 
 		// redirect them to the login page
 		$this->session->set_flashdata('message', $this->ion_auth->messages());
-		redirect('auth', 'refresh');
+		redirect(site_url().'auth/login', 'refresh');
 	}
 
 	/**
@@ -373,9 +389,6 @@ class Auth extends CI_Controller
 			redirect("auth/forgot_password", 'refresh');
 		}
 	}
-    
-
-
 
 	/**
 	 * Activate the user

@@ -4,7 +4,7 @@
 		<title><?php echo $titre; ?></title>
 		<meta http-equiv="Content-Type" content="text/html; charset=<?php echo $charset; ?>" />
 		<link rel="shortcut icon" href="<?= base_url()?>assets/images/icons/favicon.png" />
-		<meta name="keywords" content="<?php echo $content_seo; ?>"" />
+		<meta name="keywords" content="<?php echo $content_seo; ?>" />
 		<link href="<?= base_url()?>assets/css/bootstrap.css" rel="stylesheet">
 		  <link href="<?= base_url()?>assets/css/bootstrap-theme.css" rel="stylesheet">
 		  <link href="<?= base_url()?>assets/css/block_grid_bootstrap.css" rel="stylesheet">
@@ -14,7 +14,8 @@
 		  <link href="<?= base_url()?>assets/css/jquery.circliful.css" rel="stylesheet" />
 		  <link href="<?= base_url()?>assets/css/select2.css" rel="stylesheet"/>
 		  <link href="<?= base_url()?>assets/css/slicknav.css" rel="stylesheet" />
-      <link href="<?= base_url()?>assets/style.css" rel="stylesheet">
+	  <link href="<?= base_url()?>assets/style.css" rel="stylesheet">
+	  <link href="<?= base_url()?>assets/css/checkboxradio.css" rel="stylesheet">
       <link href="<?= base_url()?>assets/css/bootstrap-formhelpers.css" rel="stylesheet">
 		  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-formhelpers/2.3.0/img/bootstrap-formhelpers-countries.flags.png" rel="stylesheet">
 	<?php foreach($css as $url): ?>
@@ -52,10 +53,19 @@
         </div>
         <div class="col-sm-12 col-md-6 col-xs-12">
            <div class="text-right loginbuttons">
-              <a class="btn waves-effect waves-light btn-sm btn-success" href="limited-offers.html" title=""><i class="fa fa-gift"></i> Limited Offer</a>
-              <a class="btn waves-effect waves-light btn-sm btn-pink" href="combo-offers.html" title=""><i class="fa fa-gift"></i> Combo Offers </a>
-              <a class="btn waves-effect waves-light btn-sm btn-default" href="#" title=""><i class="fa fa-pencil"></i>  Sign Up </a>
-              <a class="btn waves-effect waves-light btn-sm btn-warning" href="<?php echo base_url(); ?>auth/login" title=""><i class="fa fa-user"></i> Account Login</a>
+		   	  <?php if(isset($logged_user)){?>
+				<span style="font-size: 20px;"> <a href="<?= base_url()?>hebergement_web_pour_developpeur/admin" title="Connection a l'espace Admin"><i class="fa fa-tachometer text-blue"></i></a> <a href="<?= base_url()?>auth/logout" title="DECONNECTION"><i class="fa fa-power-off text-red"></i></a> Bienvenue, <?php echo $this->ion_auth->user()->row()->first_name.' '.$this->ion_auth->user()->row()->last_name;?></span>
+				<?php }else{?>
+              <a class="btn waves-effect waves-light btn-sm btn-success" href="<?= base_url()?>auth/create_user" title=""><i class="fa fa-pencil"></i>  Cree ton compte </a>
+              <a class="btn waves-effect waves-light btn-sm btn-warning" href="<?php echo base_url(); ?>auth/login" title=""><i class="fa fa-user"></i> Connection</a>
+				 <?php } ?>
+			  <?php if($panier != 0) { ?>
+              <div class="pull-right bg_dark" style="margin-left: 3px"><a class="btn waves-effect waves-light btn-block dropdown-toggle btn-sm btn-danger" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i> Ton Panier (<span id="nbprod"><?= $panier['numb'] ?></span>) <span class="caret"></span></a>
+                <div id="upCart" class="dropdown-menu btn-block" role="menu">
+                    <?php echo $panier['html']; ?>
+                </div>
+                </div>
+              <?php } ?>
            </div>
         </div>
      </div>
@@ -89,17 +99,18 @@
                  <li>
                     <a href="#"><i class="fa fa-server"></i>Hosting</a>
                     <ul>
-                       <li><a href="shared.html">Shared Hosting</a></li>
-                       <li><a href="vps.html">Cloud VPS</a></li>
+                       <li><a href="<?php echo base_url(); ?>hebergement_web">Hebergement Web</a></li>
+                       <li><a href="<?php echo base_url(); ?>vps">Cloud VPS</a></li>
                        <li><a href="servers.html">Dedicated Servers</a></li>
                     </ul>
                  </li>
                  <li>
-                    <a href="#"><i class="fa fa-globe"></i>Domain Pricing</a>
+                    <a href="#"><i class="fa fa-globe"></i>Nom de Domaine</a>
                     <ul>
-                       <li><a href="<?php echo base_url(); ?>nom_de_domaine">Enregistrement de Nom de Domaine</a></li>
-                       <li><a href="single-year-pricing2.html">Single Year Pricing 2</a></li>
-                       <li><a href="multi-year-pricing.html">Multiple Year Pricing</a></li>
+                       <li><a href="<?php echo base_url(); ?>nom_de_domaine">Prix</a></li>
+                       <li><a href="<?php echo base_url(); ?>nom_de_domaine/recherche">Recherche</a></li>
+                       <li><a href="<?php echo base_url(); ?>nom_de_domaine/enregistrement">Enregistrement</a></li>
+                       <li><a href="<?php echo base_url(); ?>nom_de_domaine/transfert">Transfert</a></li>
                     </ul>
                  </li>
                  </li>
@@ -314,8 +325,12 @@
 	<script src="<?= base_url()?>assets/js/hoverIntent.js"></script>
 	<script src="<?= base_url()?>assets/js/superfish.min.js"></script>
 	<script src="<?= base_url()?>assets/js/owl.carousel.js"></script>
-	<script src="<?= base_url()?>assets/js/wow.min.js"></script>
-	<script src="<?= base_url()?>assets/js/waypoints.min.js"></script>
+    <script src="<?= base_url()?>assets/js/wow.min.js"></script>
+    <script src="<?= base_url()?>assets/js/jquery.circliful.min.js"></script>
+    <script src="<?= base_url()?>assets/js/waypoints.min.js"></script>
+    <script src="<?= base_url()?>assets/js/jquery.responsiveTabs.js"></script>
+	<script src="<?= base_url()?>assets/js/jquery-ui.js"></script>
+	<script src="<?= base_url()?>assets/js/checkboxradio.js"></script>
 	<script src="<?= base_url()?>assets/js/jquery.slicknav.min.js"></script>
 	<script src="<?= base_url()?>assets/js/retina.min.js"></script>
 	<script src="<?= base_url()?>assets/js/select2.js"></script>
@@ -327,7 +342,29 @@
   <script src="<?= base_url();?>assets/js/countrypicker.js"></script>
 
 	<script>
+    
+    // ______________  TOOLTIPS
 		$(document).on("ready", function(e) {
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+
+		// ______________ TABS
+		$('#shared-hosting-tabs').responsiveTabs({
+			startCollapsed: 'accordion'
+		});
+    
+    // ______________ TABS
+		$('#example-tabs').responsiveTabs({
+			startCollapsed: 'accordion'
+		});
+
+		// ______________ COUNTERUP
+		$('.counter').counterUp({
+			delay: 1,
+			time: 1000
+		});
+    
+    $(document).on("ready", function(e) {
 			// ______________ SLIDERS
 			var sync1 = $("#mainslider");
 			var sync2 = $("#mainslider-nav");
@@ -429,7 +466,229 @@
 				time: 1000
 			});
 		});
-	</script>
+    </script>
+    <script>
+		(
+			function($, undefined) {
+				$.ui.slider.prototype.options =
+					$.extend({},
+						$.ui.slider.prototype.options, {
+							paddingMin: 0,
+							paddingMax: 0
+						}
+					);
+
+				$.ui.slider.prototype._refreshValue =
+					function() {
+						var
+							oRange = this.options.range,
+							o = this.options,
+							self = this,
+							animate = (!this._animateOff) ? o.animate : false,
+							valPercent,
+							_set = {},
+							elementWidth,
+							elementHeight,
+							paddingMinPercent,
+							paddingMaxPercent,
+							paddedBarPercent,
+							lastValPercent,
+							value,
+							valueMin,
+							valueMax;
+
+						if (self.orientation ==="horizontal") {
+							elementWidth = this.element.outerWidth();
+							paddingMinPercent = o.paddingMin * 100 / elementWidth;
+							paddedBarPercent = (elementWidth - (o.paddingMin + o.paddingMax)) * 100 / elementWidth;
+						} else {
+							elementHeight = this.element.outerHeight();
+							paddingMinPercent = o.paddingMin * 100 / elementHeight;
+							paddedBarPercent = (elementHeight - (o.paddingMin + o.paddingMax)) * 100 / elementHeight;
+						}
+
+						if (this.options.values && this.options.values.length) {
+							this.handles.each(function(i, j) {
+								valPercent =
+									((self.values(i) - self._valueMin()) / (self._valueMax() - self._valueMin()) * 100) * paddedBarPercent / 100 + paddingMinPercent;
+								_set[self.orientation ==="horizontal" ?"left" :"bottom"] = valPercent +"%";
+								$(this).stop(1, 1)[animate ?"animate" :"css"](_set, o.animate);
+								if (self.options.range === true) {
+									if (self.orientation ==="horizontal") {
+										if (i === 0) {
+											self.range.stop(1, 1)[animate ?"animate" :"css"]({
+												left: valPercent +"%"
+											}, o.animate);
+										}
+										if (i === 1) {
+											self.range[animate ?"animate" :"css"]({
+												width: (valPercent - lastValPercent) +"%"
+											}, {
+												queue: false,
+												duration: o.animate
+											});
+										}
+									} else {
+										if (i === 0) {
+											self.range.stop(1, 1)[animate ?"animate" :"css"]({
+												bottom: (valPercent) +"%"
+											}, o.animate);
+										}
+										if (i === 1) {
+											self.range[animate ?"animate" :"css"]({
+												height: (valPercent - lastValPercent) +"%"
+											}, {
+												queue: false,
+												duration: o.animate
+											});
+										}
+									}
+								}
+								lastValPercent = valPercent;
+							});
+						} else {
+							value = this.value();
+							valueMin = this._valueMin();
+							valueMax = this._valueMax();
+							valPercent =
+								((valueMax !== valueMin) ? (value - valueMin) / (valueMax - valueMin) * 100 : 0) * paddedBarPercent / 100 + paddingMinPercent;
+
+							_set[self.orientation ==="horizontal" ?"left" :"bottom"] = valPercent +"%";
+
+							this.handle.stop(1, 1)[animate ?"animate" :"css"](_set, o.animate);
+
+							if (oRange ==="min" && this.orientation ==="horizontal") {
+								this.range.stop(1, 1)[animate ?"animate" :"css"]({
+									width: valPercent +"%"
+								}, o.animate);
+							}
+							if (oRange ==="max" && this.orientation ==="horizontal") {
+								this.range[animate ?"animate" :"css"]({
+									width: (100 - valPercent) +"%"
+								}, {
+									queue: false,
+									duration: o.animate
+								});
+							}
+							if (oRange ==="min" && this.orientation ==="vertical") {
+								this.range.stop(1, 1)[animate ?"animate" :"css"]({
+									height: valPercent +"%"
+								}, o.animate);
+							}
+							if (oRange ==="max" && this.orientation ==="vertical") {
+								this.range[animate ?"animate" :"css"]({
+									height: (100 - valPercent) +"%"
+								}, {
+									queue: false,
+									duration: o.animate
+								});
+							}
+						}
+					};
+
+				$.ui.slider.prototype._normValueFromMouse =
+					function(position) {
+						var
+							o = this.options,
+							pixelTotal,
+							pixelMouse,
+							percentMouse,
+							valueTotal,
+							valueMouse;
+
+						if (this.orientation ==="horizontal") {
+							pixelTotal = this.elementSize.width - (o.paddingMin + o.paddingMax);
+							pixelMouse = position.x - this.elementOffset.left - o.paddingMin - (this._clickOffset ? this._clickOffset.left : 0);
+						} else {
+							pixelTotal = this.elementSize.height - (o.paddingMin + o.paddingMax);
+							pixelMouse = position.y - this.elementOffset.top - o.paddingMin - (this._clickOffset ? this._clickOffset.top : 0);
+						}
+
+						percentMouse = (pixelMouse / pixelTotal);
+						if (percentMouse > 1) {
+							percentMouse = 1;
+						}
+						if (percentMouse < 0) {
+							percentMouse = 0;
+						}
+						if (this.orientation ==="vertical") {
+							percentMouse = 1 - percentMouse;
+						}
+
+						valueTotal = this._valueMax() - this._valueMin();
+						valueMouse = this._valueMin() + percentMouse * valueTotal;
+
+						return this._trimAlignValue(valueMouse);
+					};
+			}
+        )(jQuery);
+        <?php
+			$plans='';$memory='';$cpu='';$disk='';$bandw='';$price='';$pid='';$count = 0;
+			if(isset($vpss)){
+                foreach($vpss as $vps){
+                    if($count==0){$plans = "'".$vps->nom."'";}else{$plans .= ", '".$vps->nom."'";}
+                    if($count==0){$memory = "'".$vps->ram."'";}else{$memory .= ", '".$vps->ram."'";}
+                    if($count==0){$cpu = "'".$vps->processeur." X ".$vps->cores."'";}else{$cpu .= ", '".$vps->processeur." X ".$vps->cores."'";}
+                    if($count==0){$disk = "'".$vps->disque."'";}else{$disk .= ", '".$vps->disque."'";}
+                    if($count==0){$bandw = "'".$vps->bande."'";}else{$bandw .= ", '".$vps->bande."'";}
+                    if($count==0){$price = "'".$vps->prix."'";}else{$price .= ", '".$vps->prix."'";}
+                    if($count==0){$pid = "'".$vps->id."'";}else{$pid .= ", '".$vps->id."'";}
+                    $count++;
+                }
+            }
+        ?>
+		var planval = new Array(<?= $plans ?>); //Wide range of Hosting Plans. Displayed only to small screens
+		var memoryval = new Array(<?= $memory ?>); //Memory array per plan
+		var cpuval = new Array(<?= $cpu ?>); //CPU array per plan
+		var diskspaceval = new Array(<?= $disk ?>); //Disk Space array per plan
+		var bandwidthval = new Array(<?= $bandw ?>); //Bandwidth array per plan
+		var decimalval = new Array('.00', '.00', '.00', '.00', '.00',  '.00'); //Decimal array per plan
+
+		var priceval = new Array(<?= $price ?>); //Price array per plan
+		var urlval = new Array(<?= $pid ?>); //WHMCS pid array per plan
+
+		var finalurl = 'http://localhost/mboahost/vps/ajouter_panier/'; //Update"domain.com" with your WHMCS installation URL
+
+		var starting_point = 1; //Where the slider stops on first page load. Ideal to sign a plan as popular.
+
+		$(document).on("ready", function(e) {
+			$("#vps-slider").slider({
+				range: 'min',
+				animate: true,
+				min: 1,
+				max: <?= $count ?>, //Update this if you less or more plans
+				paddingMin: 0,
+				paddingMax: 0,
+				slide: function(event, ui) {
+					$('.vps-prices-container #plan_space_option span.how_much').html(planval[ui.value - 1]);
+					$('.vps-prices-container #cpu_space_option span.how_much').html(cpuval[ui.value - 1]);
+					$('.vps-prices-container #disk_space_option span.how_much').html(diskspaceval[ui.value - 1]);
+					$('.vps-prices-container #plan_option span.how_much').html(planval[ui.value - 1]);
+					$('.vps-prices-container #memory_option span.how_much').html(memoryval[ui.value - 1]);
+					$('.vps-prices-container #bandwidth_option span.how_much').html(bandwidthval[ui.value - 1]);
+					$('.vps-prices-container #price_amount').html(priceval[ui.value - 1]);
+					$('.vps-prices-container a.order-vps').attr('href', finalurl + urlval[ui.value - 1]);
+					$('.vps-prices-container #decimal').html(decimalval[ui.value - 1]);
+
+				},
+				change: function(event, ui) {
+				$('.vps-prices-container #plan_space_option span.how_much').html(planval[ui.value - 1]);
+					$('.vps-prices-container #cpu_space_option span.how_much').html(cpuval[ui.value - 1]);
+					$('.vps-prices-container #disk_space_option span.how_much').html(diskspaceval[ui.value - 1]);
+					$('.vps-prices-container #plan_option span.how_much').html(planval[ui.value - 1]);
+					$('.vps-prices-container #memory_option span.how_much').html(memoryval[ui.value - 1]);
+					$('.vps-prices-container #bandwidth_option span.how_much').html(bandwidthval[ui.value - 1]);
+					$('.vps-prices-container #price_amount').html(priceval[ui.value - 1]);
+					$('.vps-prices-container a.order-vps').attr('href', finalurl + urlval[ui.value - 1]);
+					$('.vps-prices-container #decimal').html(decimalval[ui.value - 1]);
+				}
+			});
+
+			$("#amount").val("$" + $("#vps-slider").slider("value"));
+			$('#vps-slider').slider('value', starting_point);
+
+		});
+    </script>
 	</body>
 
 </html>

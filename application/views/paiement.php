@@ -2,36 +2,35 @@
     <section class="breadcrumbs">
         <div class="row">
             <div class="col-sm-6">
-                <h1>Single Year Domain Price</h1>
+                <h1>Multi Year Domain Price</h1>
             </div>
             <div class="col-sm-6">
                 <ol class="breadcrumb">
                     <li>You are here: </li>
                     <li><a href="index.html">Home</a>
                     </li>
-                    <li class="active">Single Year Domain Price</li>
+                    <li class="active">Multi Year Domain Price</li>
                 </ol>
             </div>
         </div>
     </section>
-    <!-- End of Breadcrumps -->
+<!-- End of Breadcrumps -->
+<div class="domains bg_dark">
+    	<div>
+			<div class="row">
+				<div class="col-sm-12">
+					<h2 class="title">Find a personal domain that stands out</h2>
+					 <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
+				</div>
+			</div>
 
-    <!--  Domain Search -->
-    <div class="domains bg_dark">
-        <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title">Find a personal domain that stands out</h2>
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry...</p>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-sm-10 com-md-8 center-block">
-                <form class="form-inline domainsearch clearfix"  method="post" action="#">
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
-                            <span class="selection">
-                            <select name="tld" class="e1">
+			<div class="row ">
+				<div class="col-sm-10 com-md-8 center-block ">
+					<form class="form-inline domainsearch clearfix"  method="post" action="#">
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
+							<span class="selection">
+								<select name="tld" class="e1">
                                 <?php if ($domaines != NULL): $i = 0?>
                                   <?php  foreach ($domaines as $key => $value ): ?>
                                     <option value="<?php echo $value->extension ;?>"><?php echo $value->extension ;?></option>
@@ -39,144 +38,122 @@
                                   <?php endforeach ;?>
                                 <?php endif ;?>
                              </select>
-                            </span>
-                        </div>
-                        <div class="col-sm-2">
-                            <button type="submit" class="btn waves-effect waves-light btn-success" style="width:100%">Search</button>
-                        </div>
-                </form>
-                <?php $commonExt = array('.com', '.net', '.biz', '.org', '.info'); ?>
-                <div class="domainextensions clearfix">
-                    <ul class="hotdomains list-inline clearfix">
-                        <?php $i=0; if($domaines != null){ 
-                                foreach($domaines as $domaine) { if ($i<10){?>
-                                    <?php if(!in_array($domaine->extension, $commonExt) && $domaine->extension != '.cm') { ?><li class="new"><?php }else if($domaine->extension == '.cm'){?><li class="hot"><?php }else{?><li><?php } ?>
-                                        <div class="item"><div class="extension"><?php echo $domaine->extension; ?> <span class="price"><?php echo number_format($domaine->prix,0,0,','); ?> FCFA/An</span> <span class="oldprice">$ 20</span></div></div></li>
-                        <?php $i++;}}} ?>
-                    </ul>
-                </div>
-            </div>
-        </div>
+							</span>
+						</div>
+						<div class="col-sm-2">
+							<button type="submit" class="btn waves-effect waves-light btn-info">Search</button>
+						</div>
+					</form>
+				</div>
+				<div class="center-block text-center">
+				 <a href="<?php echo base_url(); ?>nom_de_domaine" type="submit" class="btn waves-effect waves-light btn-success margin-top-20">Prix des Extensions</a>
+				</div>
+			</div>
+		</div>
     </div>
-    <!-- End of Domain Search -->
 
-	<!-- Domains -->
-    <div class="domainfeatures section_space">
+<div class="blog section_space">
         <div class="row">
-            <div class="col-sm-12">
-                <h2 class="title"> Choose your domain at affordable price</h2>
-                <p>orem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy. </p>
-            </div>
-        </div>
+        <div class="col-sm-4">
+                <div class="sidebar">
 
-        <div class="domains-table margin-top-40">
-            <div class="row">
-                <div class="col-sm-12">
-                    <table id="tld-table" class="tablesorter responsive tablesaw-stack" data-tablesaw-mode="stack">
-                        <thead>
-                            <tr>
-                                <th>Extension</th>
-                                <th>Description</th>
-                                <th>Prix enregistrement</th>
-                                <th>Prix renouvellement</th>
-                                <th>Prix transfert</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <?php if($domaines != null){ 
-                                foreach($domaines as $domaine) {?>
-                                    <tr>
-                                <td><?php echo $domaine->extension; if ($domaine->extension == '.cm'){ ?><span class="hot label label-danger">Deal</span><?php } ?>
-                                <?php if(!in_array($domaine->extension, $commonExt) && $domaine->extension != '.cm') { ?><span class="newoffer label label-success">Nouveau</span><?php } ?></td>
-                                        <td><?php echo $domaine->description; ?></td>
-                                        <td><?php echo number_format($domaine->prix,0,0,','); ?> FCFA</td>
-                                        <td><?php echo number_format($domaine->prix_renouv,0,0,','); ?> FCFA</td>
-                                        <td><?php echo number_format($domaine->prix_xfer,0,0,','); ?> FCFA</td>
-                                    </tr>
-                                <?php }} ?>
-                        </tbody>
-                    </table>
-                    <div class="col-lg-4 center-block spacing-20 text-center">
-        <a href="multi-year-pricing.html" class="btn waves-effect waves-light btn-info btn-lg margin-top-40"> Check Various Domain Pricing</a></div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- End of Domains -->
-
-	<!-- Features -->
-    <div class=" bg_gray section_space">
-    	<div class="domainfeatures">
-            <div class="row">
-                <div class="col-sm-12">
-                    <h2 class="title"> Choose a localized / global domain that fits your business the best</h2>
-                    <p> Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry. </p>
+                    <div id="cart" class="widget bg_dark">
+                        <?php if(isset($panier['html'])) {echo $panier['html'];} else{ ?>
+                        
+                        <h3 class="badge"><span style="font-size: 26px; color:#fff;">Ton Panier <small class="text-white">(0 Produits)</small></span></h3>
+                        <table class="responsive tablesaw-stack text-white" data-tablesaw-mode="stack">
+                            <tbody>
+                                
+                            </tbody>
+                        </table>
+                        <h3 class="margin-top-30 text-white"><small class="text-white">TOTAL:</small><span id="total-panier" style="font-size: 26px;" class="pull-right">0 <sup>FCFA</sup></span></h3>
+                        <a href="<?php echo base_url(); ?>nom_de_domaine/commande_domaine" class="btn btn-success margin-top-20 minwi">Je confirme la commande</a>
+                        <?php } ?>
+                    </div>
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Most Popular</h3>
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                        <h6>.com</h6>
-                        <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                        <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
+            <div class="col-sm-8">
+                <article>
+                    <div class="domain-result icon-list-demo"><span class="pull-right text-white bg_red" style="font-size: 22px; padding: 0px 5px"><small>Montant a payer:</small> <b><?= $total ?></b> <sup>FCFA</sup></span>
+                        <br><h2><i class="ti-receipt bg_blue" style="color: #fff;"></i>Choisis ta methode de paiement preferee</h2>                        
+                        <fieldset>
+                            <legend>PAIEMENTS MOBILES - PAIEMENTS EN LIGNE | <small>Disponibilite immediate</small> </legend>
+                            <div class="row">
+                                <div class="col-md-3 selPay mtn payBtn" id="mtn">
+                                    <input class="cradiob" type="radio" name="radio-1" id="radio-1">
+                                    <label for="radio-1"><small>MTN Mobile Money</small></label>
+                                </div>
+                                <div class="col-md-3 selPay payBtn" id="om">
+                                    <input class="cradiob" type="radio" name="radio-1" id="radio-2">
+                                    <label for="radio-2"><small>ORANGE Money</small></label>
+                                </div>
+                                <div class="col-md-3 selPay payBtn" id="eum">
+                                    <input class="cradiob" type="radio" name="radio-1" id="radio-3">
+                                    <label for="radio-3"><small>Express Union Mobile</small></label>
+                                </div>
+                                <div class="col-md-3 selPay payBtn" id="btc">
+                                    <input class="cradiob" type="radio" name="radio-1" id="radio-4">
+                                    <label for="radio-4"><small>BITCOIN</small></label>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <div class="row payDesc mtnd">
+                            <div class="col-md-3">
+                                test
+                            </div>
+                            <div class="col-md-9">
+                                <p>Cliquez sur le bouton ci-dessous.<br> Vous allez recevoir une notification sur votre telephone. <br>
+                                Composez le <b>*126*votre_code_secret#</b> pour confirmer le paiement.</p>
+                            </div>
+                            <a href="<?php echo base_url(); ?>nom_de_domaine/commande_domaine" class="btn btn-success margin-top-20 minwi">Je Paie par MTN Mobile Money</a>
+                        </div>
+                        <div class="row payDesc omd" hidden>
+                            <div class="col-md-3">
+                                test
+                            </div>
+                            <div class="col-md-9">
+                                <p>Cliquez sur le bouton ci-dessous.<br> Vous allez recevoir une notification sur votre telephone. <br>
+                                Composez le <b>#150#votre_code_secret#</b> pour confirmer le paiement.</p>
+                            </div>
+                            <a href="<?php echo base_url(); ?>nom_de_domaine/commande_domaine" class="btn btn-success margin-top-20 minwi">Je Paie par ORANGE Money</a>
+                        </div>
+                        <div class="row payDesc eumd" hidden>
+                            <div class="col-md-3">
+                                test
+                            </div>
+                            <div class="col-md-9">
+                                <p>Cliquez sur le bouton ci-dessous.<br> Vous allez recevoir une notification sur votre telephone. <br>
+                                Composez le <b>#190#votre_code_secret#</b> pour confirmer le paiement.</p>
+                            </div>
+                            <a href="<?php echo base_url(); ?>nom_de_domaine/commande_domaine" class="btn btn-success margin-top-20 minwi">Je Paie par EXpress Union Mobile</a>
+                        </div>
+                        <div class="row payDesc btcd" hidden>
+                            <div class="col-md-3">
+                                test
+                            </div>
+                            <div class="col-md-9">
+                                <p>Cliquez sur le bouton ci-dessous.<br> Connectez vous a votre Portefeuille Bitcoin <br>
+                                Suivez les instructions</p>
+                            </div>
+                            <a href="<?php echo base_url(); ?>nom_de_domaine/commande_domaine" class="btn btn-success margin-top-20 minwi">Je Paie par BITCOIN</a>
+                        </div>
 
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Domain Deals</h3>
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
+                    <br><br><fieldset>
+                            <legend>TRANSFERT D'ARGENT| <small>Disponibilite apres confirmation du paiement </legend>
+                            <div class="row">
+                                
+                            </div>
+                        </fieldset>
+                        
                     </div>
-                    <div class="domainchoose">
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                    <div class="domainchoose">
-                    <h6>.xyz</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
+                </article>
+            </div>
 
-                <div class="col-sm-4 margin-top-40">
-                    <div class="domainchoose">
-                    <h3 class="title choosedomain">Individual Names</h3>
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                     <div class="domainchoose">
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                     <div class="domainchoose">
-                    <h6>.mobi</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since.</p>
-                    <a href="#" class="btn waves-effect waves-light btn-success">Check Domain</a>
-                    </div>
-                </div>
-                </div>
         </div>
     </div>
-    <!-- End of Features -->
 
-    <!-- Hosting Services -->
+<!-- Hosting Services -->
   <section class="features section_space">
 
      <div class="row">
@@ -412,7 +389,7 @@
      </div>
      <!-- End of FAQ -->
 
-	<!-- Contact -->
+     <!-- Contact -->
 	<div class="row section_space coloumgrid">
             <div class="col-sm-12 text-center multipannels">
 

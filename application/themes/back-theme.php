@@ -343,15 +343,13 @@
           <a href="#">
             <i class="fa fa-dashboard"></i>
             <span>Tableau de bord</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">8</span>
-            </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?= base_url() ?>assistance/affiliate"><i class="fa fa-gift text-warning"></i> Affiliation</a></li>
             <li><a href="#"><i class="fa fa-comment"></i> Gestion des Utilisateurs</a></li>
           </ul>
         </li>
+        <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/commande"><i class="fa fa-shopping-cart"></i>Commandes</a></li>
         <li class="treeview">
           <a href="#">
             <i class="fa  fa-ioxhost"></i> <span>Gestion des packages</span>

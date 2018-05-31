@@ -204,6 +204,63 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
  	$this->back->view('products/add-systeme-exploitation');
 
  }
+
+public function commande(){
+  $lesCommandes = array();$i=0;$j=0;
+  $cmd = $this->host_model->get_distinct('num_commande','commandes');
+  
+  foreach($cmd as $cm){
+    $commande = $this->host_model->get_where('commandes', array('num_commande'=>$cm->num_commande));
+    $lesCommandes[$i]['montant']=0;
+    foreach($commande as $com){
+      if($com->type_produit == 'domaine'){
+        $produit = $this->host_model->get_where('commande_domaine', array('id'=>$com->id_commande));
+        $user = $this->host_model->get_where('users', array('id'=>$com->client_id));
+        $produit = current($produit);$user = current($user);
+
+        $lesCommandes[$i]['num_commande']=$com->num_commande;
+        $lesCommandes[$i]['user']= $user->first_name.' '.$user->last_name;
+        if($produit->type=='transfert'){$lesCommandes[$i]['produits'][$j] = 'Transfert: '.$produit->domaine;}
+        else{$lesCommandes[$i]['produits'][$j] = 'Domaine: '.$produit->domaine;}
+        $lesCommandes[$i]['date']=date('d-M-y h:m:s', $com->date);
+        $lesCommandes[$i]['montant']+=$com->montant;
+        $lesCommandes[$i]['statut']=$com->statut;
+      }else if ($com->type_produit == 'hebergement'){
+        $produit = $this->host_model->get_where('commande_hebergement', array('id'=>$com->id_commande));
+        $user = $this->host_model->get_where('users', array('id'=>$com->client_id));
+        $produit = current($produit);$user = current($user);
+        $heb = $this->host_model->get_where('produits_hebergements', array('id'=>$produit->id_produit));
+        $dom = $this->host_model->get_where('commande_domaine', array('id'=>$produit->id_domaine));
+        $heb = current($heb);$dom = current($dom);
+
+        $lesCommandes[$i]['num_commande']=$com->num_commande;
+        $lesCommandes[$i]['user']= $user->first_name.' '.$user->last_name;
+        $lesCommandes[$i]['produits'][$j] = 'Hebergement: '.$heb->nom.' ('.$dom->domaine.')';
+        $lesCommandes[$i]['date']=date('d-M-y h:m:s', $com->date);
+        $lesCommandes[$i]['montant']+=$com->montant;
+        $lesCommandes[$i]['statut']=$com->statut;
+      }else {
+        $produit = $this->host_model->get_where('commande_vps', array('id'=>$com->id_commande));
+        $user = $this->host_model->get_where('users', array('id'=>$com->client_id));
+        $produit = current($produit);$user = current($user);
+        $heb = $this->host_model->get_where('produits_vps', array('id'=>$produit->id_produit));
+        $dom = $this->host_model->get_where('commande_domaine', array('id'=>$produit->id_domaine));
+        $heb = current($heb);$dom = current($dom);
+
+        $lesCommandes[$i]['num_commande']=$com->num_commande;
+        $lesCommandes[$i]['user']= $user->first_name.' '.$user->last_name;
+        $lesCommandes[$i]['produits'][$j] = 'Vps: '.$heb->nom.' ('.$dom->domaine.')';
+        $lesCommandes[$i]['date']=date('d-M-y h:m:s', $com->date);
+        $lesCommandes[$i]['montant']+=$com->montant;
+        $lesCommandes[$i]['statut']=$com->statut;
+      }
+      $j++;
+    }
+    $i++;
+  }
+  $this->back->view('products/commande', array('commandes'=>$lesCommandes));
+}
+
      // add addon name
  public function add_addon(){
  	// recuperation des données
