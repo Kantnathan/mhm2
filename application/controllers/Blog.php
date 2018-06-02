@@ -8,6 +8,12 @@ class Blog extends CI_Controller {
    	$this->load->library( array('layout', 'back'));
 	$this->load->library(array('ion_auth', 'form_validation'));
    	$this->load->model('host_model');
+     if (!$this->ion_auth->logged_in())
+        {
+            // redirect them to the login page
+           // $this->layout->view('auth/login', 'refresh');
+          redirect('auth', 'refresh');
+        }
    }
 
    public function index(){

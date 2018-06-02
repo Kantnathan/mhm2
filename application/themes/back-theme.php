@@ -343,13 +343,20 @@
           <a href="#">
             <i class="fa fa-dashboard"></i>
             <span>Tableau de bord</span>
+            <span class="pull-right-container">
+              <span class="label label-primary pull-right">8</span>
+            </span>
           </a>
           <ul class="treeview-menu">
             <li><a href="<?= base_url() ?>assistance/affiliate"><i class="fa fa-gift text-warning"></i> Affiliation</a></li>
+            <?php if ($this->ion_auth->is_admin()) : ?>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/commande"><i class="fa fa-shopping-cart"></i>Commandes</a></li>
+
             <li><a href="#"><i class="fa fa-comment"></i> Gestion des Utilisateurs</a></li>
+          <?php endif; ?>
           </ul>
         </li>
-        <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/commande"><i class="fa fa-shopping-cart"></i>Commandes</a></li>
+        <?php if ($this->ion_auth->is_admin()) : ?>
         <li class="treeview">
           <a href="#">
             <i class="fa  fa-ioxhost"></i> <span>Gestion des packages</span>
@@ -363,6 +370,7 @@
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_vps"><i class="fa fa-linux"></i>  VPS</a></li>
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_exploitation"><i class="fa fa-linux"></i>  Système d'exploitation</a></li>
             <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/liste_addon"><i class="fa fa-object-group"></i>  Les Addons</a></li>
+            <li><a href="<?= base_url() ?>hebergement_web_pour_developpeur/combo"><i class="fa fa-magic"></i>  Combos</a></li>
           </ul>
         </li>
         <li class="treeview">
@@ -391,6 +399,7 @@
             <li><a href="<?= base_url() ?>menus/menus_list"><i class="fa fa-th-list text-success"></i> Tous les menus</a></li>
           </ul>
         </li>
+         <?php endif; ?>
          <li class="treeview">
           <a href="#">
             <i class="fa fa-wrench"></i>

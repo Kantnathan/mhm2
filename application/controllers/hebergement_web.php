@@ -8,6 +8,7 @@ class hebergement_web extends CI_Controller {
 		$this->load->library(array('ion_auth', 'form_validation','layout','back'));
 		$this->load->model(array('host_model'));
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
+		
 
 		
    	//$this->load->model('propriete_model');

@@ -6,37 +6,20 @@ class Assistance extends CI_Controller {
 	  public function __construct(){
    	parent::__construct();
    	$this->load->library( array('layout', 'back'));
-	$this->load->library(array('ion_auth', 'form_validation'));
+	//$this->load->library(array('ion_auth', 'form_validation'));
    	$this->load->model('host_model');
-   }
-
-   public function index(){
      if (!$this->ion_auth->logged_in())
         {
             // redirect them to the login page
-            $this->layout->view('auth/login', 'refresh');
+           // $this->layout->view('auth/login', 'refresh');
+          redirect('auth', 'refresh');
         }
-        else if ($this->ion_auth->is_admin()) // remove this elseif if you want to enable this for non-admins
-        {
-            // redirect them to the home page because they must be an administrator to view this
-        $this->back->view('assistance/add-testimonial');
+   }
+
+   public function index(){
+
+   $this->back->view('assistance/add-testimonial');
         //$this->back->view('back/administrator');
-            
-        }
-        else
-        {
-            // set the flash data error message if there is one
-            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
-
-            //list the users
-            $this->data['users'] = $this->ion_auth->users()->result();
-            foreach ($this->data['users'] as $k => $user)
-            {
-                $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
-            }
-
-            $this->layout->view('auth/index', $this->data);
-        }
    }
 
     // ajout d'un temoignage 
@@ -133,18 +116,21 @@ public function single_ticket($id){
       	foreach ($result as $spec) {
       # code...
       $data_where = array('id_ticket'=>$spec->id);
+      $id_user = array('id'=>$spec->id_user);
+      $user = $this->host_model->getbyid_element("users", $id_user);
       $message = $this->host_model->getbyid_element("message", $data_where);
       //$pays = $this->propriete_model->getbyid_element("pays", $data_where_pays);
       $data[] = array(
         'ticket'=>$spec,
         'message'=> $message,
+        'users'=> $user,
         //'pays'=> $pays,
       );
     };
     $liste = array('list'=>$data);
     $yes =  json_encode($liste);
-   // var_dump($liste);
-   	$this->back->view('assistance/single-ticket', array('liste'=> $data));
+    //var_dump($user);
+   $this->back->view('assistance/single-ticket', array('liste'=> $data));
    }
 
       // update statut temoignage

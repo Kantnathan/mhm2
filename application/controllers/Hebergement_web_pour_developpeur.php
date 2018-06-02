@@ -9,7 +9,6 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
 		$this->load->model(array('host_model'));
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
 
-		
    	//$this->load->model('propriete_model');
 	}
 
@@ -47,8 +46,10 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
             {
                 $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
             }
-
-            $this->layout->view('auth/index', $this->data);
+          ///$this->session->set_userdata('refered_from', $_SERVER['HTTP_REFERER']);
+         // echo $this->session->userdata('refered_from');
+          //print_r($_SERVER);
+        $this->back->view('back/administrator' , $this->data);
         }
 	}
 
@@ -75,21 +76,37 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
 
  // add domain name
  public function add_domain(){
- 	// recuperation des données
- 	$data = array(
+     if (!$this->ion_auth->logged_in())
+        {
+            // redirect them to the login page
+            $this->layout->view('auth/login', 'refresh');
+        }else {
+            // set the flash data error message if there is one
+            $this->data['message'] = (validation_errors()) ? validation_errors() : $this->session->flashdata('message');
+
+            //list the users
+            $this->data['users'] = $this->ion_auth->users()->result();
+            foreach ($this->data['users'] as $k => $user)
+            {
+                $this->data['users'][$k]->groups = $this->ion_auth->get_users_groups($user->id)->result();
+            }
+// recuperation des données
+  $data = array(
          'extension'  => $this->input->post('extension'),
          'prix'       => $this->input->post('prix'),
          'prix_renouv'=> $this->input->post('prix_renouv'),
          'prix_xfer'  => $this->input->post('prix_transfert'),
          'frequence'  => $this->input->post('frequence'),
          'description'=> $this->input->post('desc'),
- 	);
- 	$query = $this->host_model->set('produits_domaines', $data);
-     	//var_dump($query);
+  );
+  $query = $this->host_model->set('produits_domaines', $data);
+      //var_dump($query);
      
      $result = $this->host_model->get_all('frequences');
      $apiresult = $this->host_model->get_all('api_domaines');
      $this->liste_domaines();
+        }
+ 	
     
  	//$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
 
@@ -181,29 +198,7 @@ class Hebergement_web_pour_developpeur extends CI_Controller {
  	$this->back->view('products/add-vps', array('liste'=>$result));
      
  }
- public function add_vps_view(){
- 	$systeme = $this->host_model->get_all('systemes_exp');
- 	$result = $this->host_model->get_all('frequences');
- 	$this->back->view('products/add-vps', array('liste'=>$result,'sys'=>$systeme));
 
- }
-    // add vps name
- public function add_systeme(){
- 	// recuperation des données
- 	$data = array(
-         'os'   => $this->input->post('os'),
-         'name' => $this->input->post('name'),
-         
- 	);
- 	$query = $this->host_model->set('systemes_exp', $data);
-     	//var_dump($query);
- 	$this->back->view('products/add-systeme-exploitation');
-     
- }
- public function add_systeme_view(){
- 	$this->back->view('products/add-systeme-exploitation');
-
- }
 
 public function commande(){
   $lesCommandes = array();$i=0;$j=0;
@@ -261,6 +256,30 @@ public function commande(){
   $this->back->view('products/commande', array('commandes'=>$lesCommandes));
 }
 
+ // add vps
+ public function add_vps_view(){
+ 	$systeme = $this->host_model->get_all('systemes_exp');
+ 	$result = $this->host_model->get_all('frequences');
+ 	$this->back->view('products/add-vps', array('liste'=>$result,'sys'=>$systeme));
+
+ }
+    // add vps name
+ public function add_systeme(){
+ 	// recuperation des données
+ 	$data = array(
+         'os'   => $this->input->post('os'),
+         'name' => $this->input->post('name'),
+         
+ 	);
+ 	$query = $this->host_model->set('systemes_exp', $data);
+     	//var_dump($query);
+ 	$this->back->view('products/add-systeme-exploitation');
+     
+ }
+ public function add_systeme_view(){
+ 	$this->back->view('products/add-systeme-exploitation');
+
+ }
      // add addon name
  public function add_addon(){
  	// recuperation des données
@@ -344,6 +363,21 @@ public function commande(){
 
    };
    $this->liste_hebergement();
+   }
+   // update statut combo
+   public function statut_combo($id){
+   $data = $this->host_model->getbyid('combos', $id);
+   $statut = $data->statut;
+//   echo $statut;
+
+   if ($statut == 1) {
+     # code...
+     $this->host_model->update_statut('combos', $id, 0);
+   }else{
+     $this->host_model->update_statut('combos', $id, 1);
+
+   };
+   $this->liste_combo();
    }
 
    // update statut domaine
@@ -538,5 +572,38 @@ public function commande(){
   //$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
 
      
+ }
+
+ // combo view
+public function combo(){
+  if ($this->input->post('host') != NULL ) {
+    $host = $this->input->post('host');
+    $domain = $this->input->post('domaine');
+    foreach ($domain as $dom ) {
+      $data = array(
+      'host'=> $host,
+      'domaine'=> $dom,
+      'created_at'=> date("Y-m-d H:i:s"),
+
+      );
+      $result = $this->host_model->set('combos', $data);
+    }
+    # code...
+    $comboMessage = $result?'Ajout effectué avec succès':"une erreur est survenue lors de l'envoie";
+   $this->session->set_flashdata('comboMessage',$comboMessage);
+
+  }
+
+  $combo = $this->host_model->get_all('combos');
+  $host = $this->host_model->get_all('produits_hebergements');
+  $domain = $this->host_model->get_all('produits_domaines');
+  $this->back->view('products/combo', array('liste'=> $combo, 'host'=> $host,  'domain'=> $domain));
+
+}
+ public function liste_combo(){
+$combo = $this->host_model->get_all('combos');
+  $host = $this->host_model->get_all('produits_hebergements');
+  $domain = $this->host_model->get_all('produits_domaines');
+  $this->back->view('products/combo', array('liste'=> $combo, 'host'=> $host,  'domain'=> $domain));
  }
 }

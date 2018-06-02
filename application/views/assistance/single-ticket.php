@@ -115,50 +115,28 @@
                   <?php $i = $i+1;
                 endforeach; ?>
                 </p>
-                <div class="attachment">
-                  <h4>Attachments:</h4>
-
-                  <p class="filename">
-                    Theme-thumbnail-image.jpg
-                  </p>
-
-                  <div class="pull-right">
-                    <button type="button" class="btn btn-primary btn-sm btn-flat">Open</button>
-                  </div>
-                </div>
-                <!-- /.attachment -->
               </div>
               <!-- /.item -->
               <!-- chat item -->
+              <?php $i = 0;
+                   ?>
+                  <?php foreach ($liste as $key => $value) :?>
               <div class="item">
                 <img src="<?= base_url()?>assets/dist/img/user3-128x128.jpg" alt="user image" class="offline">
 
-                <p class="message">
+              <p class="message">
                   <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:15</small>
-                    Alexander Pierce
+                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> <?php echo $liste[$i]['message']->created_at; ?></small>
+                    Mike Doe
                   </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
+                   
+                  <?php echo $liste[$i]['message']->message; ?>
                 </p>
               </div>
+               <?php $i = $i+1;
+                endforeach; ?>
               <!-- /.item -->
-              <!-- chat item -->
-              <div class="item">
-                <img src="<?= base_url()?>assets/dist/img/user2-160x160.jpg" alt="user image" class="offline">
-
-                <p class="message">
-                  <a href="#" class="name">
-                    <small class="text-muted pull-right"><i class="fa fa-clock-o"></i> 5:30</small>
-                    Susan Doe
-                  </a>
-                  I would like to meet you to discuss the latest news about
-                  the arrival of the new theme. They say it is going to be one the
-                  best themes on the market
-                </p>
-              </div>
-              <!-- /.item -->
+              
             </div>
             <!-- /.chat -->
             <div class="box-footer">
