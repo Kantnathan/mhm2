@@ -35,7 +35,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                   <label>Selectionner les extensions</label>
-                  <select class="form-control " style="width: 100%;" name="combo">
+                  <select class="form-control " style="width: 100%;" name="host">
                     <?php if ($host != NULL): $i = 0?>
                             <?php  foreach ($host as $key => $value ): ?>
                             <option value="<?php echo $host[$i]->nom ;?>"><?php echo $host[$i]->nom ;?></option>
