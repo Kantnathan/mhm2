@@ -929,6 +929,7 @@ h2.elements{font-size:29px;text-align:left;border-bottom:1px solid #ededed;font-
 .blog article{background:#fff;margin-bottom:40px;-webkit-box-shadow:0 2px 10px 0 rgba(0,0,0,.16);-moz-box-shadow:0 2px 10px 0 rgba(0,0,0,.16);box-shadow:0 2px 10px 0 rgba(0,0,0,.16)}
 .blog.single article{margin-bottom:40px;}
 .blog article .post-content{padding:15px;position:relative;}
+.blog article .domain-result{padding:15px;position:relative;}
 .blog article .post-content h2{font-size:26px;font-family:'Oxygen', sans-serif;width:80%; font-weight:500;position: relative;top:-8px;}
 .blog article .post-content h2 a{color:#333 !important;}
 .blog article .post-content h2 a:hover{color:#2951a1 !important;}

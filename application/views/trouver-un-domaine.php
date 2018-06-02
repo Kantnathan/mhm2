@@ -26,7 +26,7 @@
 
 			<div class="row ">
 				<div class="col-sm-10 com-md-8 center-block ">
-					<form class="form-inline domainsearch clearfix"  method="post" action="#">
+					<form class="form-inline domainsearch clearfix"  method="post" action="<?php echo base_url(); ?>nom_de_domaine/recherche">
 						<div class="col-sm-10">
 							<input type="text" class="form-control" name="sld" placeholder="Search your domain name"/>
 							<span class="selection">

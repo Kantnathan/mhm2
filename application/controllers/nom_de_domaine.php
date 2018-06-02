@@ -5,6 +5,8 @@ class nom_de_domaine extends CI_Controller {
 	public function __construct(){
 
 		parent::__construct();
+		include APPPATH . 'third_party\domain\Domainapi.php';
+
 		$this->load->library(array('ion_auth', 'form_validation','layout','back'));
 		$this->load->model(array('host_model'));
 		$this->form_validation->set_error_delimiters($this->config->item('error_start_delimiter', 'ion_auth'), $this->config->item('error_end_delimiter', 'ion_auth'));
@@ -20,15 +22,33 @@ class nom_de_domaine extends CI_Controller {
 	}
 	
 	public function recherche() {
-		$resultatRech = array(
-			array('domaine'=>'domaine.xyz', 'statut'=>'free', 'prix'=>'11000', 'type'=>'main'),
-		);
-		$autresOpt = array(
-			array('domaine'=>'domaine2.xyz', 'statut'=>'busy', 'prix'=>'12000', 'type'=>'option'),
-			array('domaine'=>'domaine3.xyz', 'statut'=>'free', 'prix'=>'13000', 'type'=>'option'),
-			array('domaine'=>'domaine4.xyz', 'statut'=>'busy', 'prix'=>'14000', 'type'=>'option'),
-			array('domaine'=>'domaine5.xyz', 'statut'=>'free', 'prix'=>'15000', 'type'=>'option')
-		);
+		
+		$this->form_validation->set_rules('sld', 'Nom de domaine', 'required');
+		$data=array();
+		if ($this->form_validation->run() === TRUE){
+			$domain = $this->input->post('sld');
+			$topl = $this->input->post('tld');
+
+			$tlds = $this->host_model->get_where('produits_domaines', array('api'=>1));
+			$doamineapi = new Domainapi();
+			$data = $doamineapi->check_availability($domain, $topl, $tlds);
+		}
+
+		$resultatRech = array();
+		$autresOpt = array();
+
+		foreach($data as $domai=>$infos){
+			if($domai==$domain.$topl){
+				$infoTld = current($this->host_model->get_where('produits_domaines', array('extension'=>$topl)));
+				if($infos['status']=='available'){$statut='free';}else{$statut='busy';}
+				$resultatRech[]=array('domaine'=>$domai, 'statut'=>$statut, 'prix'=>$infoTld->prix, 'type'=>'main');
+			}else{
+				$topl = substr($domai, strpos($domai,'.'));
+				$infoTld = current($this->host_model->get_where('produits_domaines', array('extension'=>$topl)));
+				if($infos['status']=='available'){$statut='free';}else{$statut='busy';}
+				$autresOpt[]=array('domaine'=>$domai, 'statut'=>$statut, 'prix'=>$infoTld->prix, 'type'=>'main');
+			}
+		}
 		$result = $this->host_model->get_all('produits_domaines');
         	$this->layout->view('trouver-un-domaine', array('domaines'=>$result, 'recher'=>$resultatRech, 'options'=>$autresOpt, 'panier'=>$this->get_panier2()));
 	}
