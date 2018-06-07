@@ -573,6 +573,37 @@ public function commande(){
 
      
  }
+// edit products
+
+   public function edit_host($id){
+   $data = $this->host_model->getbyid_ticket('produits_hebergements', $id);
+   $result = $this->host_model->get_all('frequences');
+   $apiresult = $this->host_model->get_all('api_domaines');
+  $this->back->view('products/add-host', array('liste'=>$result, 'apis'=>$apiresult,'single' => $data));
+ }
+   // update domain name
+ public function update_host(){
+  // recuperation des données
+  $id = $this->input->post('id');
+  $data = array(
+         'extension'  => $this->input->post('extension'),
+         'prix'       => $this->input->post('prix'),
+         'prix_renouv'=> $this->input->post('prix_renouv'),
+         'prix_xfer'  => $this->input->post('prix_transfert'),
+         'frequence'  => $this->input->post('frequence'),
+         'description'=> $this->input->post('desc'),
+  );
+  $query = $this->host_model->edit('produits_hebergements', $data, $id);
+      //var_dump($query);
+     
+     $result = $this->host_model->get_all('frequences');
+     $apiresult = $this->host_model->get_all('api_domaines');
+     $this->liste_hebergement();
+    
+  //$this->back->view('products/add-domain-name', array('liste'=>$result, 'apis'=>$apiresult));
+
+     
+ }
 
  // combo view
 public function combo(){

@@ -392,6 +392,23 @@ $config['sess_table_name'] = 'ci_sessions';
 $config['sess_time_to_update'] = 300;
 $config['sess_regenerate_destroy'] = FALSE;
 
+
+
+/**
+| -------------------------------------------------------------------
+|  Native Auto-load
+| -------------------------------------------------------------------
+|
+| Nothing to do with config/autoload.php, this allows PHP autoload to work
+| for base controllers and some third-party libraries.
+|
+*/
+function __autoload($class)
+{
+    if(strpos($class, 'CI_') !== 0) {
+        require(APPPATH . 'core/'. $class . '.php');
+    }
+}
 /*
 |--------------------------------------------------------------------------
 | Cookie Related Variables

@@ -58,7 +58,7 @@ $autoload['packages'] = array();
 |
 |	$autoload['libraries'] = array('user_agent' => 'ua');
 */
-$autoload['libraries'] = array('database', 'session', 'layout','ion_auth', 'form_validation','back');
+$autoload['libraries'] = array('database', 'session', 'layout','ion_auth', 'form_validation','back', 'Facebook_ion_auth');
 
 /*
 | -------------------------------------------------------------------

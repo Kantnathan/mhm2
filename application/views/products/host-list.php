@@ -99,7 +99,7 @@
           <!-- /.modal-dialog -->
         </div>
                   <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#d<?php echo $liste[$i]->id ;?>"><i class="fa fa-trash-o" style="margin-right: 7px;"></i></button>
-                  <button type="button" class="btn btn-default btn-sm "><i class="fa fa-edit" style="margin-right: 7px;"></i></button>
+                 <a href="<?= base_url() ?>Hebergement_web_pour_developpeur/edit_host/<?php echo $liste[$i]->id ;?>"> <button type="button" class="btn btn-default btn-sm "><i class="fa fa-edit" style="margin-right: 7px;"></i></button></a>
                   <a href="<?= base_url() ?>Hebergement_web_pour_developpeur/single_host/<?php echo $liste[$i]->id ;?>"><button type="button" class="btn btn-default btn-sm "><i class="fa fa-eye" style="margin-right: 7px;"></i></button></a>
                   <?php if ($liste[$i]->statut == 0): ?>
                   <button type="button" class="btn btn-success btn-sm "  data-toggle="modal" data-target="#<?php echo $liste[$i]->id ;?>" > <i class="fa  fa-check-square" style="margin-right: 7px;"></i></button>

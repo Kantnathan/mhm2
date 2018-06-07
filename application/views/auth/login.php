@@ -37,6 +37,11 @@
                                                 <a class="btn-link" tabindex="4" href="<?= base_url()?>auth/create_user">Create an account</a>
                                             </div>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-sm-8 col-sm-offset-2">
+                                                <a class="btn waves-effect waves-light btn-success btn-block" tabindex="4" href="<?= site_url('facebook_login'); ?>">Login with Facebook</a>
+                                            </div>
+                                        </div>
                                 </div>
                             </div>
                         </div>
