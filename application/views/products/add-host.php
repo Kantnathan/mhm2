@@ -22,7 +22,7 @@
           <!-- general form elements -->
           <div class="box box-primary">
             <div class="box-header with-border">
-              <h3 class="box-title">Extension</h3>
+              <h3 class="box-title"><?= $single[$j]->nom ;?></h3>
             </div>
             <!-- /.box-header -->
                <?php echo form_open("Hebergement_web_pour_developpeur/add_host");?>
@@ -30,39 +30,39 @@
                 <div class="col-md-6">
                   <div class="form-group">
                   <label for="name">Nom de l'espace</label>
-                  <input type="text" class="form-control"  placeholder="Nom de l'espace" name="name">
+                  <input type="text" class="form-control"  placeholder="Nom de l'espace" name="name" value="<?= $single[$j]->nom ;?>">
                  <?php echo "<p style=\"color: red;\">"; echo form_error('name'); echo "</p>"; ?>
                 </div>
 
                 <div class="form-group">
                   <label for="disque">Capacité disque</label>
-                  <input type="number" class="form-control" id="disque" placeholder="Capacité disque" name="disque">
+                  <input type="number" class="form-control" id="disque" placeholder="Capacité disque" name="disque" value="<?= $single[$j]->disque ;?>">
                 </div>
                 <div class="form-group">
                   <label for="prix">Prix de l'espace</label>
-                  <input type="number" class="form-control" id="prix" placeholder="Prix " name="prix">
+                  <input type="number" class="form-control" id="prix" placeholder="Prix " name="prix" value="<?= $single[$j]->prix ;?>">
                 </div>
                 <div class="form-group">
                   <label for="nb_sous_domaine">Nombre de sous domaine</label>
-                  <input type="text" class="form-control"  placeholder="Sous domaine" name="nb_sous_domaine">
+                  <input type="text" class="form-control"  placeholder="Sous domaine" name="nb_sous_domaine" value="<?= $single[$j]->sous_domaines ;?>">
                 </div>
                 <div class="form-group">
                   <label for="ftp">Nombre de compte ftp</label>
-                  <input type="text" class="form-control"  placeholder="compte ftp" name="ftp">
+                  <input type="text" class="form-control"  placeholder="compte ftp" name="ftp" value="<?= $single[$j]->comptes_ftp ;?>">
                 </div>
                 <div class="form-group">
                   <label for="bd">Nombre de base de données</label>
-                  <input type="number" class="form-control" id="bd" placeholder="Base de Données" name="bd">
+                  <input type="number" class="form-control" id="bd" placeholder="Base de Données" name="bd" value="<?= $single[$j]->bases_donnees ;?>">
                 </div>
                 </div>
                  <div class="col-md-6">
                   <div class="form-group">
                   <label for="nb_email">Nombre d'adresse email</label>
-                  <input type="text" class="form-control"  placeholder="Nombre d'adresse email" name="nb_email">
+                  <input type="text" class="form-control"  placeholder="Nombre d'adresse email" name="nb_email" value="<?= $single[$j]->adresses_email ;?>">
                 </div>
                 <div class="form-group">
                   <label for="st_email">Capacite de stockage email</label>
-                  <input type="text" class="form-control"  placeholder="Stockage email" name="st_email">
+                  <input type="text" class="form-control"  placeholder="Stockage email" name="st_email" value="<?= $single[$j]->stockage_email ;?>">
                 </div>
                   <div class="form-group">
                   <label>Frequence</label>
@@ -77,15 +77,15 @@
                 </div>
                 <div class="form-group">
                   <label for="bp">Capacité bande passante</label>
-                  <input type="text" class="form-control"  placeholder="Bande passante" name="bp">
+                  <input type="text" class="form-control"  placeholder="Bande passante" name="bp" value="<?= $single[$j]->bande_passante ;?>">
                 </div>
                 <div class="form-group">
                   <label for="pjointes">Capacité pièces jointes</label>
-                  <input type="text" class="form-control"  placeholder="Taille pièces jointes" name="pjointes">
+                  <input type="text" class="form-control"  placeholder="Taille pièces jointes" name="pjointes" value="<?= $single[$j]->pieces_jointes ;?>">
                 </div>
                  <div class="form-group">
                   <label for="siteweb">Nombre des sites web</label>
-                  <input type="text" class="form-control"  placeholder="Nombre des sites web" name="siteweb">
+                  <input type="text" class="form-control"  placeholder="Nombre des sites web" name="siteweb" value="<?= $single[$j]->site_web ;?>">
                 </div>
               </div>
             </div>
